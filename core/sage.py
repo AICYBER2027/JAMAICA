@@ -1,0 +1,42 @@
+from core.base_agent import BaseAgent
+from core.logger import log
+
+
+class Sage(BaseAgent):
+    """The thinking layer. Proposes plans and recommendations.
+    It can never place a trade or override the Risk Manager."""
+
+    name = "Sage"
+    alias = "Sage"
+    division = "Investment"
+    rank = "Commander"
+    commander = "Raphael"
+    purpose = "Thinker and planner: decides which agents run and weighs their results into a recommendation."
+
+    def handle(self, task):
+        """Sage works through plan() and recommend(); handle() is not used directly."""
+        raise NotImplementedError("Sage uses plan() and recommend(), not handle()")
+
+    def plan(self, goal):
+        """Decide which agents to run, in order, for a goal."""
+        log(f"Sage planning for goal: {goal}")
+        return ["MarketResearch", "NewsResearch", "Sentiment", "Charts", "Strategy"]
+
+    def recommend(self, results):
+        """Weigh agent results into a recommendation with confidence and reasoning."""
+        signal = results.get("Strategy", {}).get("signal", "hold")
+        sentiment = results.get("NewsResearch", {}).get("sentiment", "neutral")
+        trend = results.get("MarketResearch", {}).get("trend", "unknown")
+        crowd_mood = results.get("Sentiment", {}).get("crowd_mood", "neutral")
+        pattern = results.get("Charts", {}).get("pattern", "none")
+
+        recommendation = {
+            "action": signal,
+            "confidence": 0.0,
+            "reasoning": f"trend={trend}, sentiment={sentiment}, "
+                         f"crowd_mood={crowd_mood}, pattern={pattern}, "
+                         f"strategy signal={signal}. "
+                         f"Placeholder Sage: no real analysis yet.",
+        }
+        log(f"Sage recommendation: {recommendation}")
+        return recommendation
