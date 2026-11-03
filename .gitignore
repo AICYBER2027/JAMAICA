@@ -8,3 +8,7 @@ __pycache__/
 
 data/
 all-ai-city-code.txt
+
+# Website: hotel data files are source, not trading data
+!website/data/
+.taste-skill/

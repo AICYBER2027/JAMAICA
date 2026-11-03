@@ -1,0 +1,56 @@
+{
+  "slug": "casa-da-serra",
+  "name": "Casa da Serra",
+  "demo": true,
+  "order": 3,
+  "languages": ["pt", "en", "es"],
+  "timeZone": "Europe/Lisbon",
+  "currency": "EUR",
+  "town": "Manteigas, Serra da Estrela",
+  "tagline": {
+    "pt": "Uma casa de granito com quatro quartos e uma lareira, a 700 metros de altitude.",
+    "en": "A granite house with four rooms and one fireplace, 700 metres up.",
+    "es": "Una casa de granito con cuatro habitaciones y una chimenea, a 700 metros de altitud."
+  },
+  "about": {
+    "pt": "Fica no fim da estrada, onde começa o trilho para o Poço do Inferno. Fazemos o pão no forno a lenha às sextas.",
+    "en": "It sits where the road ends and the trail to Poço do Inferno begins. We bake bread in the wood oven on Fridays.",
+    "es": "Está donde acaba la carretera y empieza el sendero al Poço do Inferno. Hacemos pan en el horno de leña los viernes."
+  },
+  "theme": { "ground": "#E9ECE3", "surface": "#DCE1D2", "ink": "#1F2B1C", "accent": "#3B6631", "accentInk": "#FFFFFF", "font": "figtree" },
+  "scene": "hills",
+  "whatsapp": "351910000000",
+  "bookingUrl": "https://www.airbnb.com/",
+  "bookingSite": "Airbnb",
+  "email": "casa@example.com",
+  "phone": "+351 910 000 000",
+  "address": "Estrada do Poço do Inferno, 6260 Manteigas",
+  "mapUrl": "https://www.google.com/maps/search/?api=1&query=Manteigas+Serra+da+Estrela",
+  "checkIn": "16:00",
+  "checkOut": "11:00",
+  "amenities": [
+    { "pt": "Lareira na sala", "en": "Fireplace in the living room", "es": "Chimenea en el salón" },
+    { "pt": "Pão caseiro às sextas", "en": "Home-baked bread on Fridays", "es": "Pan casero los viernes" },
+    { "pt": "Estacionamento", "en": "Parking", "es": "Aparcamiento" },
+    { "pt": "Mapas dos trilhos", "en": "Trail maps", "es": "Mapas de senderos" }
+  ],
+  "rooms": [
+    { "id": "1", "number": "1", "scene": "double", "guests": 2, "price": 90,
+      "name": { "pt": "Quarto do Forno", "en": "Oven Room", "es": "Habitación del Horno" },
+      "beds": { "pt": "Cama de casal", "en": "Double bed", "es": "Cama de matrimonio" },
+      "description": { "pt": "Por cima do forno a lenha: o mais quente da casa.", "en": "Above the wood oven: the warmest room in the house.", "es": "Encima del horno de leña: la más cálida de la casa." } },
+    { "id": "2", "number": "2", "scene": "twin", "guests": 2, "price": 80,
+      "name": { "pt": "Quarto do Vale", "en": "Valley Room", "es": "Habitación del Valle" },
+      "beds": { "pt": "Duas camas de solteiro", "en": "Two single beds", "es": "Dos camas individuales" },
+      "description": { "pt": "Janela grande sobre o vale do Zêzere.", "en": "A big window over the Zêzere valley.", "es": "Ventana grande sobre el valle del Zêzere." } },
+    { "id": "3", "number": "3", "scene": "family", "guests": 4, "price": 130,
+      "name": { "pt": "Quarto do Pastor", "en": "Shepherd's Room", "es": "Habitación del Pastor" },
+      "beds": { "pt": "Cama de casal e duas de solteiro", "en": "A double and two single beds", "es": "Una de matrimonio y dos individuales" },
+      "description": { "pt": "O maior, com mantas de burel feitas na vila.", "en": "The largest, with burel wool blankets made in the village.", "es": "La más grande, con mantas de burel hechas en el pueblo." } },
+    { "id": "4", "number": "4", "scene": "single", "guests": 1, "price": 55,
+      "name": { "pt": "Quarto do Trilho", "en": "Trail Room", "es": "Habitación del Sendero" },
+      "beds": { "pt": "Cama de solteiro", "en": "Single bed", "es": "Cama individual" },
+      "description": { "pt": "Para quem chega a pé e parte cedo.", "en": "For walkers who arrive on foot and leave early.", "es": "Para quien llega a pie y sale temprano." } }
+  ],
+  "adminPasswordHash": "scrypt$38d3c5df2fbdcbcf9b5ac85d4e3ccaf1$b606ad67a5ab6b43ff8300dd44f3a414d8b2438e00f7c380fcff1ad89680f956"
+}

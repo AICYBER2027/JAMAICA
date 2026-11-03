@@ -42,6 +42,7 @@ After building or changing anything visual, open it in a browser and look at it 
 ### Websites: where they live and how they go online
 
 - Each website lives in its own folder at the repo root, such as `website/`. It never mixes with the trading code.
+- `website/` is the hotel website product: one Next.js app with a sales page (`/en`, `/pt`, `/es`) and one site per hotel (`/<lang>/h/<slug>`), each hotel a JSON file in `website/data/hotels/`. Adding or changing a hotel means editing that JSON (see `website/README.md`). Run `npm test`, `npm run typecheck` and `npm run build` in `website/` before pushing.
 - Default stack for a new site unless the user asks otherwise: plain HTML/CSS/JS for simple sites; Next.js + Tailwind when it needs several pages, a blog or app features.
 - Deploying: the site is hosted on Vercel, connected to this GitHub repo with the site folder as its Root Directory. Every merge to `main` goes live automatically, and every pull request gets its own preview link. So "put it online" or "publish the change" means: commit, push, open a PR (the preview link appears on it), and tell the user to merge it.
 - If the Vercel connector is loaded, use it to check the deployment status and build logs after pushing, and to fix failed builds.
