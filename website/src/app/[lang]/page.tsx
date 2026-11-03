@@ -34,7 +34,7 @@ export default async function SalesPage({ params }: PageProps<"/[lang]">) {
   if (!isLang(lang)) notFound();
   const c = SALES[lang];
   const hotels = await getHotels();
-  const demos = hotels.filter((h) => h.demo);
+  const demos = hotels.filter((h) => h.demo && !h.unlisted);
   const featured = demos[0] ?? hotels[0];
   const availability = featured ? await getAvailability(featured, 28) : null;
   const ownerWhatsapp = `https://wa.me/${SITE.whatsapp}`;

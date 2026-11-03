@@ -35,6 +35,8 @@ export interface Hotel {
   name: string;
   /** Sample hotel: shows made-up bookings so the calendar isn't empty. */
   demo?: boolean;
+  /** Hidden: not listed on the sales page and not shown to search engines (e.g. a pitch to a hotel). */
+  unlisted?: boolean;
   /** Position in lists of hotels (lower first). */
   order?: number;
   /** Languages the site is offered in; the first one is the default. */

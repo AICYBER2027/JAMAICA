@@ -16,6 +16,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/h/[slug]">
   return {
     title: `${hotel.name}, ${t(hotel.town, lang)}`,
     description: t(hotel.tagline, lang),
+    ...(hotel.unlisted ? { robots: { index: false, follow: false } } : {}),
     alternates: { languages: Object.fromEntries(hotel.languages.map((l) => [l, `/${l}/h/${hotel.slug}`])) },
   };
 }
