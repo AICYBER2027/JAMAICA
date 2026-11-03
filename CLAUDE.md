@@ -34,6 +34,10 @@ Use the first row that matches. Combine skills when a request covers several row
 
 If the user shares a Figma link or mentions a Figma design and the Figma MCP tools are available, use them to read the design (frames, styles, variables) before writing code. Then build it using the skills above. If the Figma tools aren't available, say so in one line and ask the user to connect Figma at https://claude.ai/customize/connectors.
 
+### Playwright: look at the result
+
+After building or changing anything visual, open it in a browser and look at it before calling the work done. Don't wait to be asked. Use the Playwright MCP tools if they're loaded, otherwise the Playwright library directly. Take screenshots at desktop width and at phone width (390px), check for broken layout, overflow and console errors, fix what you find, and show the user the final screenshot. Also use Playwright when the user asks to test a page, click through a flow, or check a live site.
+
 ### Not design work
 
 Skip all of this for non-visual work such as the trading logic in `core/`, `divisions/`, `main.py` and similar.
