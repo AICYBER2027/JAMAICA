@@ -8,7 +8,8 @@ Use the first row that matches. Combine skills when a request covers several row
 
 | When the user asks to… | Use |
 |---|---|
-| Build a new website, landing page, marketing or public-facing page, or says it looks generic / "AI-made" / not premium | `design-taste-frontend` |
+| Create a new website from scratch | `frontend-design` for the design plan (palette, type, layout), then `design-taste-frontend` to build and lint it |
+| Build a new landing page, marketing or public-facing page, or says it looks generic / "AI-made" / not premium | `design-taste-frontend` (plus `frontend-design` if there's no design direction yet) |
 | Build or redesign an app screen (dashboard, settings, forms, onboarding, empty states) | `impeccable` (`shape`, then `craft`) |
 | Start design work in a project with no DESIGN.md yet | `impeccable init` first |
 | "Make it better", polish, clean up, final pass before shipping | `impeccable polish` |
@@ -37,6 +38,13 @@ If the user shares a Figma link or mentions a Figma design and the Figma MCP too
 ### Playwright: look at the result
 
 After building or changing anything visual, open it in a browser and look at it before calling the work done. Don't wait to be asked. Use the Playwright MCP tools if they're loaded, otherwise the Playwright library directly. Take screenshots at desktop width and at phone width (390px), check for broken layout, overflow and console errors, fix what you find, and show the user the final screenshot. Also use Playwright when the user asks to test a page, click through a flow, or check a live site.
+
+### Websites: where they live and how they go online
+
+- Each website lives in its own folder at the repo root, such as `website/`. It never mixes with the trading code.
+- Default stack for a new site unless the user asks otherwise: plain HTML/CSS/JS for simple sites; Next.js + Tailwind when it needs several pages, a blog or app features.
+- Deploying: the site is hosted on Vercel, connected to this GitHub repo with the site folder as its Root Directory. Every merge to `main` goes live automatically, and every pull request gets its own preview link. So "put it online" or "publish the change" means: commit, push, open a PR (the preview link appears on it), and tell the user to merge it.
+- If the Vercel connector is loaded, use it to check the deployment status and build logs after pushing, and to fix failed builds.
 
 ### Not design work
 
