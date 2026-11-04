@@ -51,6 +51,8 @@ export interface Hotel {
   theme: { ground: string; surface: string; ink: string; accent: string; accentInk: string; font: FontName };
   photo?: string;
   photoAlt?: Text;
+  /** Which part of the main photo to show inside the big letters, as CSS background-position ("50% 30%"). */
+  photoFocus?: string;
   scene?: SceneName;
   /** International format, digits only: country code + number. */
   whatsapp?: string;
