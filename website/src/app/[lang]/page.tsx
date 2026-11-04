@@ -1,22 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getAvailability } from "@/lib/availability.ts";
 import { getHotels } from "@/lib/hotels.ts";
-import { fill, hotelDict, isLang, LANG_NAMES, LANGS, t } from "@/lib/i18n.ts";
+import { fill, isLang, LANGS, t } from "@/lib/i18n.ts";
 import { SALES } from "@/lib/sales-copy.ts";
 import { SITE } from "@/lib/site.ts";
-import { FaqIndex } from "@/components/sales/FaqIndex.tsx";
-import { HowPicture, KeyPicture } from "@/components/sales/Drawings.tsx";
-import { Motion } from "@/components/sales/Motion.tsx";
-import { Portrait } from "@/components/sales/Portrait.tsx";
-import { Showcase } from "@/components/sales/Showcase.tsx";
+import { LangSwitch } from "@/components/LangSwitch.tsx";
 import { SignupForm } from "@/components/sales/SignupForm.tsx";
-import { PlaceScene } from "@/components/Scenes.tsx";
-import "@fontsource-variable/bricolage-grotesque";
+import "@fontsource-variable/figtree";
+import "@fontsource/bowlby-one";
 import "./sales.css";
-
-// Rebuilt at most every 15 minutes so the sample calendars stay current.
-export const revalidate = 900;
 
 export async function generateMetadata({ params }: PageProps<"/[lang]">): Promise<Metadata> {
   const { lang } = await params;
@@ -25,203 +17,173 @@ export async function generateMetadata({ params }: PageProps<"/[lang]">): Promis
   return {
     title: `${SITE.brand}: ${c.metaTitle}`,
     description: c.metaDescription,
+    metadataBase: new URL(SITE.url),
     alternates: { languages: Object.fromEntries(LANGS.map((l) => [l, `/${l}`])) },
+    openGraph: { type: "website", title: `${SITE.brand}: ${c.title}`, description: c.metaDescription, images: [`/sales/${lang}/postcard.jpg`] },
   };
+}
+
+function WhatsAppMark() {
+  return (
+    <svg className="sp-wa" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path
+        fill="currentColor"
+        d="M12 2.2a9.7 9.7 0 0 0-8.3 14.8L2.4 21.8l4.9-1.3A9.7 9.7 0 1 0 12 2.2Zm0 17.7a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1 1 12 19.9Zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6a2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .1-1.2c0-.1-.2-.2-.5-.3Z"
+      />
+    </svg>
+  );
 }
 
 export default async function SalesPage({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
   if (!isLang(lang)) notFound();
   const c = SALES[lang];
-  const hotels = await getHotels();
-  const demos = hotels.filter((h) => h.demo && !h.unlisted);
-  const featured = demos[0] ?? hotels[0];
-  const availability = featured ? await getAvailability(featured, 28) : null;
+  const examples = (await getHotels()).filter((h) => h.demo && !h.unlisted);
+  const lead = examples[0];
   const ownerWhatsapp = `https://wa.me/${SITE.whatsapp}`;
 
   return (
     <div className="sales">
-      <Motion />
+      <header className="sp-bar">
+        <a className="sp-wordmark" href={`/${lang}`}>
+          {SITE.brand}
+        </a>
+        <nav className="sp-nav" aria-label={c.nav.how}>
+          <a href="#how">{c.nav.how}</a>
+          <a href="#examples">{c.nav.examples}</a>
+          <a href="#questions">{c.nav.questions}</a>
+        </nav>
+        <LangSwitch current={lang} label={c.language} items={LANGS.map((l) => ({ lang: l, href: `/${l}` }))} />
+      </header>
 
-      <section className="s-pin" aria-labelledby="title" style={{ ["--panels" as string]: demos.length || 1 }}>
-        <div className="s-pin-layer">
-          <header className="s-bar">
-            <a className="s-wordmark" href={`/${lang}`}>
-              {SITE.brand}
+      <section className="sp-hero" aria-labelledby="title">
+        <div className="sp-hero-text">
+          <h1 id="title">{c.title}</h1>
+          <p className="sp-lede">{c.lede}</p>
+          <div className="sp-actions">
+            <a className="sp-button is-send" href="#start">
+              {c.start}
             </a>
-            <nav aria-label={c.menu} className="s-bar-nav">
-              {LANGS.filter((l) => l !== lang).map((l) => (
-                <a key={l} href={`/${l}`} hrefLang={l} lang={l}>
-                  {LANG_NAMES[l]}
-                </a>
-              ))}
-              <a href="#menu">{c.menu}</a>
-            </nav>
-          </header>
-          <h1 id="title" className="s-title">
-            {c.title}
-          </h1>
-          <p className="s-lede">{c.lede}</p>
-          <a className="s-button s-pin-action" href="#start">
-            {c.start}
-          </a>
+            {lead && (
+              <a className="sp-button is-ink" href={`/${lang}/h/${lead.slug}`}>
+                {c.seeExample}
+              </a>
+            )}
+          </div>
         </div>
-        <div className="s-panels">
-          {demos.map((h, i) => (
-            <div key={h.slug} className="s-panel" style={{ background: h.theme.ground, color: h.theme.ink }}>
-              <Portrait
-                href={`/${lang}/h/${h.slug}`}
-                src={`/${lang}/h/${h.slug}`}
-                label={fill(c.seeSite, { hotel: h.name })}
-                eager={i === 0}
-              />
-              <p className="s-caption">
-                {fill(c.caption, { hotel: h.name, town: t(h.town, lang), rooms: h.rooms.length, site: h.bookingSite ?? "" })}
-              </p>
-            </div>
-          ))}
-        </div>
+        {lead && (
+          <figure className="sp-hero-phone">
+            <a className="sp-phone" href={`/${lang}/h/${lead.slug}`}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={`/sales/${lang}/phone-${lead.slug}.jpg`} alt={c.heroCaption} width={780} height={1560} fetchPriority="high" />
+            </a>
+            <figcaption>{c.heroCaption}</figcaption>
+          </figure>
+        )}
       </section>
 
-      {featured && availability && (
-        <Showcase
-          lang={lang}
-          copy={c}
-          hotel={{
-            name: featured.name,
-            slug: featured.slug,
-            whatsapp: featured.whatsapp ?? "",
-            rooms: featured.rooms.map((r) => ({ id: r.id, number: r.number, name: t(r.name, lang), guests: r.guests })),
-          }}
-          availability={availability}
-          dict={hotelDict(lang)}
-        />
-      )}
-
-      <section className="s-how" aria-labelledby="how-title">
-        <h2 id="how-title" className="visually-hidden">
-          {c.howTitle}
-        </h2>
+      <section className="sp-see" aria-labelledby="see-title">
+        <h2 id="see-title">{c.seeTitle}</h2>
         <ol>
-          {c.steps.map((step, i) => (
-            <li key={step.verb} className={`s-how-panel s-how-${i + 1}`}>
-              <HowPicture step={i} />
-              <div className="s-how-verb-track">
-                <p className="s-how-verb" aria-hidden="true">
-                  {step.verb}
-                </p>
+          {c.see.map((item) => (
+            <li key={item.img}>
+              <div className="sp-see-text">
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
               </div>
-              <p className="s-how-text">
-                <span className="visually-hidden">{step.verb}. </span>
-                {step.text}
-              </p>
+              <figure className="sp-shot">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={`/sales/${lang}/${item.img}.jpg`} alt={item.alt} width={1208} height={448} loading="lazy" />
+              </figure>
             </li>
           ))}
         </ol>
       </section>
 
-      <section className="s-list" aria-labelledby="list-title">
-        <h2 id="list-title" className="s-list-title" data-reveal>
-          {c.listTitle}
-        </h2>
-        <table>
-          <thead className="visually-hidden">
-            <tr>
-              {c.listHead.map((h) => (
-                <th key={h} scope="col">
-                  {h}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {c.list.map(([what, detail, who]) => (
-              <tr key={what} data-reveal>
-                <th scope="row">{what}</th>
-                <td>{detail}</td>
-                <td>{who}</td>
-              </tr>
+      <section id="how" className="sp-how" aria-labelledby="how-title">
+        <div className="sp-card">
+          <div className="sp-edge" aria-hidden="true" />
+          <h2 id="how-title">{c.howTitle}</h2>
+          <ol className="sp-steps">
+            {c.steps.map((s, i) => (
+              <li key={s.title}>
+                <span className="sp-step-n" aria-hidden="true">
+                  {i + 1}
+                </span>
+                <h3>{s.title}</h3>
+                <p>{s.text}</p>
+              </li>
             ))}
-          </tbody>
-        </table>
+          </ol>
+        </div>
       </section>
 
-      <FaqIndex title={c.faqTitle} items={c.faq} />
-
-      <section id="start" className="s-cta" aria-labelledby="cta-title">
-        <div className="s-cta-picture">
-          {featured && (
-            <div
-              className="s-cta-scene"
-              style={{
-                ["--scene-sky" as string]: featured.theme.surface,
-                ["--scene-a" as string]: featured.theme.accent,
-                ["--scene-ink" as string]: featured.theme.ink,
-                ["--scene-ground" as string]: featured.theme.ground,
-              }}
-            >
-              <PlaceScene name={featured.scene ?? "sea"} title={`${featured.name}, ${t(featured.town, lang)}`} />
-            </div>
-          )}
+      <section id="examples" className="sp-examples" aria-labelledby="examples-title">
+        <div className="sp-head">
+          <h2 id="examples-title">{c.examplesTitle}</h2>
+          <p>{c.examplesText}</p>
         </div>
-        <div className="s-cta-text">
-          <h2 id="cta-title" data-reveal>
-            {c.ctaTitle}
-          </h2>
-          <p data-reveal>{c.ctaText}</p>
+        <ul>
+          {examples.map((h) => (
+            <li key={h.slug}>
+              <a href={`/${lang}/h/${h.slug}`}>
+                <span className="sp-phone">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={`/sales/${lang}/phone-${h.slug}.jpg`} alt="" width={780} height={1560} loading="lazy" />
+                </span>
+                <span className="sp-example-name">{h.name}</span>
+                <span className="sp-example-town">
+                  {t(h.town, lang)} ({c.sample})
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="sp-included" aria-labelledby="included-title">
+        <h2 id="included-title">{c.includedTitle}</h2>
+        <ul>
+          {c.included.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section id="questions" className="sp-faq" aria-labelledby="faq-title">
+        <h2 id="faq-title">{c.faqTitle}</h2>
+        <div className="sp-faq-list">
+          {c.faq.map((f, i) => (
+            <details key={f.q} open={i === 0}>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section id="start" className="sp-cta" aria-labelledby="cta-title">
+        <div className="sp-card">
+          <div className="sp-edge" aria-hidden="true" />
+          <h2 id="cta-title">{c.ctaTitle}</h2>
+          <p>{c.ctaText}</p>
           <SignupForm copy={c.form} whatsapp={SITE.whatsapp} />
         </div>
       </section>
 
-      <footer id="menu" className="s-footer">
-        <div className="s-footer-picture">
-          <KeyPicture label={SITE.brand} />
-        </div>
-        <div className="s-footer-menu">
-          <p className="s-footer-wordmark">{SITE.brand}</p>
-          <nav aria-label={c.menu}>
-            <ul className="s-footer-links">
-              <li>
-                <a href="#how-title">{c.howTitle}</a>
-              </li>
-              <li>
-                <a href="#list-title">{c.listTitle}</a>
-              </li>
-              <li>
-                <a href="#faq-title">{c.faqTitle}</a>
-              </li>
-              <li>
-                <a href="#start">{c.start}</a>
-              </li>
-            </ul>
-          </nav>
-          <div className="s-footer-blocks">
-            <div>
-              <h2>{c.footerContact}</h2>
-              <ul>
-                <li>
-                  <a href={ownerWhatsapp} target="_blank" rel="noopener">
-                    WhatsApp
-                  </a>
-                </li>
-                <li>
-                  <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h2>{c.footerDemos}</h2>
-              <ul>
-                {demos.map((h) => (
-                  <li key={h.slug}>
-                    <a href={`/${lang}/h/${h.slug}`}>{h.name}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          <p className="s-legal">{fill(c.footerLegal, { brand: SITE.brand })}</p>
-        </div>
+      <footer className="sp-footer">
+        <p className="sp-footer-name">{SITE.brand}</p>
+        <ul>
+          <li>
+            <a href={ownerWhatsapp} target="_blank" rel="noopener">
+              <WhatsAppMark /> {c.talk}
+            </a>
+          </li>
+          <li>
+            <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+          </li>
+        </ul>
+        <p className="sp-legal">{fill(c.footerLegal, { brand: SITE.brand })}</p>
       </footer>
     </div>
   );

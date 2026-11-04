@@ -13,7 +13,7 @@ export function SignupForm({ copy, whatsapp }: { copy: SalesCopy["form"]; whatsa
 
   return (
     <form
-      className="s-form"
+      className="sp-form"
       action={`https://wa.me/${whatsapp}`}
       method="get"
       target="_blank"
@@ -39,7 +39,7 @@ export function SignupForm({ copy, whatsapp }: { copy: SalesCopy["form"]; whatsa
         <input name="sites" placeholder={copy.sitesHint} value={v.sites} onChange={set("sites")} />
       </label>
       <input type="hidden" name="text" value={message} />
-      <button type="submit" className="s-button s-button-paper">
+      <button type="submit" className="sp-button is-send">
         {copy.send}
       </button>
     </form>
