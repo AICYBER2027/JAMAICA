@@ -1,7 +1,7 @@
 // Your business details: change these before going live.
 export const SITE = {
   /** The name of your service. */
-  brand: "Chave",
+  brand: "Hóspede Direto",
   /** Your WhatsApp number for hotel owners, digits only with country code. */
   whatsapp: "5511999990000",
   email: "ola@example.com",
