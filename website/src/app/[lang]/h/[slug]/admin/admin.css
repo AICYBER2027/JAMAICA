@@ -1,0 +1,58 @@
+/* The hotel's own screen for marking booked days: quiet, large targets, works on a phone at the front desk. */
+.admin {
+  --bg: #f4f5f3;
+  --surface: #e6e9e4;
+  --ink: #1b221f;
+  --soft: #4a554f;
+  --focus: var(--accent);
+  font-family: "Figtree Variable", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100svh;
+  padding: 0 clamp(16px, 3vw, 40px) 64px;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+}
+.a-bar { display: flex; align-items: center; gap: 20px; padding: 18px 0; }
+.a-hotel { font-weight: 650; margin-right: auto; }
+.a-bar a { text-underline-offset: 4px; }
+.a-text-button { background: none; border: 0; padding: 0; text-decoration: underline; text-underline-offset: 4px; }
+.admin h1 { font-size: clamp(2rem, 1.4rem + 2.6vw, 3.25rem); letter-spacing: -0.03em; line-height: 1; margin: 32px 0 16px; }
+.a-help { max-width: 62ch; margin-bottom: 32px; }
+.a-message { max-width: 52ch; padding: 20px; background: var(--surface); }
+
+.a-login { display: grid; gap: 10px; max-width: 360px; }
+.a-login label { font-weight: 600; }
+.a-login input { min-height: 52px; padding: 0 14px; border: 2px solid var(--surface); border-radius: 10px; background: #fff; font-size: 1.0625rem; }
+.a-login input:focus-visible { outline: none; border-color: var(--accent); }
+.a-error { font-weight: 600; }
+.a-button { min-height: 52px; border: 0; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-weight: 600; margin-top: 8px; }
+.a-button:active { transform: scale(0.98); }
+
+.a-controls { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+.a-step { width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--surface); font-size: 1.5rem; line-height: 1; }
+.a-step:disabled { opacity: 0.4; cursor: not-allowed; }
+.a-month { font-weight: 650; font-size: 1.375rem; min-width: 10ch; text-align: center; }
+.a-month::first-letter { text-transform: uppercase; }
+.a-status { margin-left: auto; font-weight: 600; color: var(--soft); min-height: 1.5em; }
+.a-status.is-error { color: var(--ink); background: #ffe1d6; padding: 4px 10px; border-radius: 6px; }
+
+.a-rooms { display: grid; gap: 36px 56px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 480px), 1fr)); }
+.a-room h2 { font-size: 1.25rem; letter-spacing: -0.01em; margin-bottom: 10px; }
+.a-number { display: inline-block; min-width: 2ch; font-variant-numeric: tabular-nums; }
+.a-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; max-width: 760px; }
+.a-day {
+  width: 100%; min-height: 56px; border: 0; border-radius: 8px; padding: 6px 4px;
+  display: grid; place-content: center; gap: 0; text-align: center;
+  background: #fff; transition: transform 120ms cubic-bezier(0.23, 1, 0.32, 1), background-color 120ms ease;
+}
+.a-day:active { transform: scale(0.94); }
+.a-day.is-manual { background: var(--accent); color: var(--accent-ink); }
+.a-day.is-synced { background: var(--ink); color: var(--bg); cursor: not-allowed; }
+.a-dow { font-size: 0.8125rem; line-height: 1.2; }
+.a-dom { font-weight: 650; font-variant-numeric: tabular-nums; line-height: 1.2; }
+.a-legend { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 28px; font-size: 0.9375rem; }
+.a-legend li { display: flex; align-items: center; gap: 8px; }
+.a-key { width: 20px; height: 20px; border-radius: 4px; background: #fff; }
+.a-key.is-manual { background: var(--accent); }
+.a-key.is-synced { background: var(--ink); }

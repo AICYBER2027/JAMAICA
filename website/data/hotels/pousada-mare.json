@@ -1,0 +1,61 @@
+{
+  "slug": "pousada-mare",
+  "name": "Pousada Maré",
+  "demo": true,
+  "order": 1,
+  "languages": ["pt", "en", "es"],
+  "timeZone": "America/Sao_Paulo",
+  "currency": "BRL",
+  "town": "Paraty, Rio de Janeiro",
+  "tagline": {
+    "pt": "Cinco quartos a duzentos passos da praia do Jabaquara.",
+    "en": "Five rooms, two hundred steps from Jabaquara beach.",
+    "es": "Cinco habitaciones a doscientos pasos de la playa de Jabaquara."
+  },
+  "about": {
+    "pt": "Uma casa colonial de portas azuis, com café da manhã servido no quintal debaixo da mangueira. A maré sobe até à rua duas vezes por mês; nós avisamos quando.",
+    "en": "A colonial house with blue doors and breakfast served in the yard under the mango tree. The tide comes up to the street twice a month; we'll tell you when.",
+    "es": "Una casa colonial de puertas azules, con desayuno servido en el patio bajo el mango. La marea sube hasta la calle dos veces al mes; te avisamos cuándo."
+  },
+  "theme": { "ground": "#E4EEEA", "surface": "#D3E3DC", "ink": "#0D3532", "accent": "#0B6E61", "accentInk": "#FFFFFF", "font": "newsreader" },
+  "scene": "sea",
+  "whatsapp": "5524999990000",
+  "bookingUrl": "https://www.booking.com/",
+  "bookingSite": "Booking.com",
+  "email": "reservas@example.com",
+  "phone": "+55 24 99999-0000",
+  "address": "Rua do Comércio 41, Centro Histórico, Paraty",
+  "mapUrl": "https://www.google.com/maps/search/?api=1&query=Paraty+Centro+Historico",
+  "checkIn": "14:00",
+  "checkOut": "11:00",
+  "amenities": [
+    { "pt": "Café da manhã no quintal", "en": "Breakfast in the yard", "es": "Desayuno en el patio" },
+    { "pt": "Wi-Fi em toda a casa", "en": "Wi-Fi in every room", "es": "Wi-Fi en toda la casa" },
+    { "pt": "Toalhas de praia e guarda-sol", "en": "Beach towels and a parasol", "es": "Toallas de playa y sombrilla" },
+    { "pt": "Ar-condicionado", "en": "Air conditioning", "es": "Aire acondicionado" },
+    { "pt": "Bicicletas emprestadas", "en": "Bikes to borrow", "es": "Bicicletas prestadas" }
+  ],
+  "rooms": [
+    { "id": "1", "number": "1", "scene": "double", "guests": 2, "price": 380,
+      "name": { "pt": "Quarto da Mangueira", "en": "Mango Tree Room", "es": "Habitación del Mango" },
+      "beds": { "pt": "Cama de casal", "en": "Double bed", "es": "Cama de matrimonio" },
+      "description": { "pt": "Janela para o quintal, onde o café é servido.", "en": "Window onto the yard where breakfast is served.", "es": "Ventana al patio donde se sirve el desayuno." } },
+    { "id": "2", "number": "2", "scene": "twin", "guests": 2, "price": 340,
+      "name": { "pt": "Quarto das Redes", "en": "Hammock Room", "es": "Habitación de las Hamacas" },
+      "beds": { "pt": "Duas camas de solteiro", "en": "Two single beds", "es": "Dos camas individuales" },
+      "description": { "pt": "Varanda com duas redes, virada a nascente.", "en": "Balcony with two hammocks, facing the sunrise.", "es": "Balcón con dos hamacas, mirando al amanecer." } },
+    { "id": "3", "number": "3", "scene": "suite", "guests": 3, "price": 520,
+      "name": { "pt": "Suíte da Maré", "en": "Tide Suite", "es": "Suite de la Marea" },
+      "beds": { "pt": "Cama king e sofá-cama", "en": "King bed and a sofa bed", "es": "Cama king y sofá cama" },
+      "description": { "pt": "O quarto de cima, com vista para o mar por cima dos telhados.", "en": "The top-floor room, with a sea view over the rooftops.", "es": "La habitación de arriba, con vista al mar sobre los tejados." } },
+    { "id": "4", "number": "4", "scene": "family", "guests": 4, "price": 560,
+      "name": { "pt": "Quarto Família", "en": "Family Room", "es": "Habitación Familiar" },
+      "beds": { "pt": "Cama de casal e beliche", "en": "Double bed and bunk beds", "es": "Cama de matrimonio y litera" },
+      "description": { "pt": "No térreo, com saída direta para o quintal.", "en": "On the ground floor, opening straight onto the yard.", "es": "En la planta baja, con salida directa al patio." } },
+    { "id": "5", "number": "5", "scene": "single", "guests": 1, "price": 220,
+      "name": { "pt": "Quarto do Pescador", "en": "Fisherman's Room", "es": "Habitación del Pescador" },
+      "beds": { "pt": "Cama de solteiro", "en": "Single bed", "es": "Cama individual" },
+      "description": { "pt": "Pequeno e fresco, para quem viaja sozinho.", "en": "Small and cool, for travelling on your own.", "es": "Pequeña y fresca, para quien viaja solo." } }
+  ],
+  "adminPasswordHash": "scrypt$38d3c5df2fbdcbcf9b5ac85d4e3ccaf1$b606ad67a5ab6b43ff8300dd44f3a414d8b2438e00f7c380fcff1ad89680f956"
+}

@@ -1,0 +1,56 @@
+{
+  "slug": "hostal-azahar",
+  "name": "Hostal Azahar",
+  "demo": true,
+  "order": 2,
+  "languages": ["es", "en", "pt"],
+  "timeZone": "Europe/Madrid",
+  "currency": "EUR",
+  "town": "Sevilla, Barrio de Santa Cruz",
+  "tagline": {
+    "es": "Cuatro habitaciones alrededor de un patio con naranjos.",
+    "en": "Four rooms around a courtyard of orange trees.",
+    "pt": "Quatro quartos à volta de um pátio com laranjeiras."
+  },
+  "about": {
+    "es": "Una casa del siglo XIX en una calle demasiado estrecha para los coches. En marzo el patio huele a azahar; el resto del año, a café.",
+    "en": "A nineteenth-century house on a street too narrow for cars. In March the courtyard smells of orange blossom; the rest of the year, of coffee.",
+    "pt": "Uma casa do século XIX numa rua estreita demais para carros. Em março o pátio cheira a flor de laranjeira; no resto do ano, a café."
+  },
+  "theme": { "ground": "#EEEEEA", "surface": "#E1DFD7", "ink": "#2A1F14", "accent": "#9A5B0B", "accentInk": "#FFFFFF", "font": "bricolage" },
+  "scene": "city",
+  "whatsapp": "34600000000",
+  "bookingUrl": "https://www.booking.com/",
+  "bookingSite": "Booking.com",
+  "email": "hola@example.com",
+  "phone": "+34 600 000 000",
+  "address": "Calle Mesón del Moro 7, 41004 Sevilla",
+  "mapUrl": "https://www.google.com/maps/search/?api=1&query=Barrio+Santa+Cruz+Sevilla",
+  "checkIn": "15:00",
+  "checkOut": "12:00",
+  "amenities": [
+    { "es": "Desayuno en el patio", "en": "Breakfast in the courtyard", "pt": "Pequeno-almoço no pátio" },
+    { "es": "Azotea con vistas a la Giralda", "en": "Roof terrace with a view of the Giralda", "pt": "Terraço com vista para a Giralda" },
+    { "es": "Aire acondicionado", "en": "Air conditioning", "pt": "Ar condicionado" },
+    { "es": "Wi-Fi", "en": "Wi-Fi", "pt": "Wi-Fi" }
+  ],
+  "rooms": [
+    { "id": "1", "number": "1", "scene": "double", "guests": 2, "price": 95,
+      "name": { "es": "Naranjo", "en": "Orange Tree", "pt": "Laranjeira" },
+      "beds": { "es": "Cama de matrimonio", "en": "Double bed", "pt": "Cama de casal" },
+      "description": { "es": "Da al patio, a la sombra del naranjo.", "en": "Opens onto the courtyard, in the orange tree's shade.", "pt": "Dá para o pátio, à sombra da laranjeira." } },
+    { "id": "2", "number": "2", "scene": "twin", "guests": 2, "price": 85,
+      "name": { "es": "Azulejo", "en": "Tile Room", "pt": "Azulejo" },
+      "beds": { "es": "Dos camas individuales", "en": "Two single beds", "pt": "Duas camas de solteiro" },
+      "description": { "es": "Zócalo de azulejos de Triana de 1890.", "en": "Walls lined with Triana tiles from 1890.", "pt": "Rodapé de azulejos de Triana de 1890." } },
+    { "id": "3", "number": "3", "scene": "suite", "guests": 3, "price": 140,
+      "name": { "es": "Azotea", "en": "Roof Room", "pt": "Terraço" },
+      "beds": { "es": "Cama king y sofá cama", "en": "King bed and a sofa bed", "pt": "Cama king e sofá-cama" },
+      "description": { "es": "Sale directamente a la azotea.", "en": "Steps straight out onto the roof terrace.", "pt": "Sai diretamente para o terraço." } },
+    { "id": "4", "number": "4", "scene": "single", "guests": 1, "price": 60,
+      "name": { "es": "Celosía", "en": "Lattice Room", "pt": "Gelosia" },
+      "beds": { "es": "Cama individual", "en": "Single bed", "pt": "Cama de solteiro" },
+      "description": { "es": "Pequeña, tranquila, con ventana de celosía a la calle.", "en": "Small and quiet, with a latticed window onto the street.", "pt": "Pequeno e sossegado, com janela de gelosia para a rua." } }
+  ],
+  "adminPasswordHash": "scrypt$38d3c5df2fbdcbcf9b5ac85d4e3ccaf1$b606ad67a5ab6b43ff8300dd44f3a414d8b2438e00f7c380fcff1ad89680f956"
+}
