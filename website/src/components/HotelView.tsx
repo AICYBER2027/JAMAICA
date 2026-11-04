@@ -89,6 +89,38 @@ function Postmark({ town, line1, line2, stampKey }: { town: string; line1: strin
   );
 }
 
+/** A room's postcard front: the main photo, and small pictures to tap through the others. */
+function RoomFront({ room, name, hotelName, lang }: { room: PublicHotel["rooms"][number]; name: string; hotelName: string; lang: Lang }) {
+  const all = [...(room.photo ? [{ src: room.photo, alt: name }] : []), ...(room.photos ?? []).map((p) => ({ src: p.src, alt: t(p.alt, lang) }))];
+  const [shown, setShown] = useState(0);
+  const current = all[shown];
+  return (
+    <figure className="pc-front">
+      {current ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img key={current.src} className="pc-front-main" src={current.src} alt={current.alt} width={1400} height={933} loading="lazy" />
+      ) : (
+        <RoomScene name={room.scene ?? "double"} title={name} />
+      )}
+      {all.length > 1 && (
+        <ul className="pc-thumbs">
+          {all.map((p, i) => (
+            <li key={p.src}>
+              <button type="button" aria-label={p.alt} aria-pressed={i === shown} onClick={() => setShown(i)}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={p.src} alt="" width={160} height={107} loading="lazy" />
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+      <figcaption>
+        {current && current.alt !== name ? `${name}: ${current.alt}` : name}, {hotelName}
+      </figcaption>
+    </figure>
+  );
+}
+
 export function HotelView({
   hotel,
   availability,
@@ -196,8 +228,13 @@ export function HotelView({
   return (
     <div className="hotel" style={theme}>
       <header className="pc-bar">
-        <a className="pc-wordmark" href={`/${lang}/h/${hotel.slug}`}>
-          {hotel.name}
+        <a className={`pc-wordmark${hotel.logo ? " has-logo" : ""}`} href={`/${lang}/h/${hotel.slug}`}>
+          {hotel.logo ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={hotel.logo} alt={hotel.name} width={353} height={330} />
+          ) : (
+            hotel.name
+          )}
         </a>
         <nav className="pc-nav" aria-label={hotel.name}>
           <a href="#rooms">{d.rooms}</a>
@@ -351,17 +388,7 @@ export function HotelView({
             const bookUrl = room.bookingUrl ?? hotel.bookingUrl;
             return (
               <li key={room.id} id={`room-${room.id}`} className={`pc-room ${free ? "is-free" : "is-taken"} ${i % 2 ? "is-flipped" : ""}`}>
-                <figure className="pc-front">
-                  {room.photo ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={room.photo} alt={name} width={1400} height={933} loading="lazy" />
-                  ) : (
-                    <RoomScene name={room.scene ?? "double"} title={name} />
-                  )}
-                  <figcaption>
-                    {name}, {hotel.name}
-                  </figcaption>
-                </figure>
+                <RoomFront room={room} name={name} hotelName={hotel.name} lang={lang} />
                 <div className="pc-room-back">
                   <h3>
                     {room.number && <span className="visually-hidden">{fill(d.roomN, { n: room.number })}, </span>}
@@ -593,6 +620,10 @@ export function HotelView({
             <PlaceScene name={hotel.scene ?? "sea"} title="" />
           )}
         </div>
+        {hotel.logo && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img className="pc-footer-logo" src={hotel.logo} alt="" width={353} height={330} loading="lazy" />
+        )}
         <p className="pc-footer-name">{hotel.name}</p>
         <p className="pc-footer-by">
           <a href={`/${lang}`}>{fill(d.siteBy, { brand })}</a>
