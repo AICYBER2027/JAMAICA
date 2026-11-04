@@ -14,3 +14,15 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
 }
+
+/* Language picker (hotel and sales pages). Colours come from the page: --ls-bg, --ls-ink, --ls-on, --ls-on-ink. */
+.lang-switch { display: inline-flex; padding: 3px; gap: 2px; background: var(--ls-bg, rgb(255 255 255 / 0.16)); border-radius: 999px; font-size: 0.9375rem; font-weight: 700; flex: none; }
+.lang-switch a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border-radius: 999px; color: var(--ls-ink, inherit); text-decoration: none; transition: background-color 160ms ease, color 160ms ease; }
+.lang-switch a:hover { background: rgb(255 255 255 / 0.14); }
+.lang-switch a[aria-current="true"] { background: var(--ls-on, #fff); color: var(--ls-on-ink, #000); }
+.lang-short { display: none; }
+@media (max-width: 700px) {
+  .lang-full { display: none; }
+  .lang-short { display: inline; }
+  .lang-switch a { padding: 0 12px; }
+}

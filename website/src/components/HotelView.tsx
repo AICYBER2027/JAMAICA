@@ -5,7 +5,8 @@ import type { Availability } from "@/lib/availability.ts";
 import { bookedNights, bookingLink, clashes, formatDate, formatPrice, nightsLabel, whatsappLink, type Stay } from "@/lib/booking.ts";
 import { addDays, diffDays, isISODate, parseISO, type ISODate } from "@/lib/dates.ts";
 import type { Hotel } from "@/lib/hotels.ts";
-import { fill, hotelDict, LANG_NAMES, LOCALES, t, type Lang } from "@/lib/i18n.ts";
+import { fill, hotelDict, LOCALES, t, type Lang } from "@/lib/i18n.ts";
+import { LangSwitch } from "./LangSwitch.tsx";
 import { PlaceScene, RoomScene } from "./Scenes.tsx";
 
 type PublicHotel = Omit<Hotel, "adminPasswordHash">;
@@ -186,7 +187,6 @@ export function HotelView({
   const bookLabel = hotel.bookingSite ? fill(d.bookOn, { site: hotel.bookingSite }) : d.bookOnline;
   const boardDays = Array.from({ length: BOARD_DAYS }, (_, i) => addDays(boardStart, i));
   const lastStart = addDays(availability.to, -BOARD_DAYS);
-  const otherLangs = hotel.languages.filter((l) => l !== lang);
   const query = `?from=${stay.from}&to=${stay.to}&guests=${stay.guests}`;
   const shortDate = (day: ISODate) =>
     new Intl.DateTimeFormat(LOCALES[lang], { timeZone: "UTC", day: "2-digit", month: "short" }).format(parseISO(day)).replace(".", "").toUpperCase();
@@ -204,17 +204,11 @@ export function HotelView({
           <a href="#availability">{d.availability}</a>
           <a href="#location">{d.location}</a>
         </nav>
-        {otherLangs.length > 0 && (
-          <ul className="pc-langs" aria-label={d.language}>
-            {otherLangs.map((l) => (
-              <li key={l}>
-                <a href={`/${l}/h/${hotel.slug}${query}`} hrefLang={l} lang={l}>
-                  {LANG_NAMES[l]}
-                </a>
-              </li>
-            ))}
-          </ul>
-        )}
+        <LangSwitch
+          current={lang}
+          label={d.language}
+          items={hotel.languages.map((l) => ({ lang: l, href: `/${l}/h/${hotel.slug}${query}` }))}
+        />
       </header>
 
       <section className="pc-hero" aria-labelledby="hotel-name">
