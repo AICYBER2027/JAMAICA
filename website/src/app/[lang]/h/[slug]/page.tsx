@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getAvailability } from "@/lib/availability.ts";
 import { getHotel, publicHotel } from "@/lib/hotels.ts";
-import { isLang, t } from "@/lib/i18n.ts";
+import { isLang, LOCALES, t } from "@/lib/i18n.ts";
 import { SITE } from "@/lib/site.ts";
 import { HotelView } from "@/components/HotelView.tsx";
 
@@ -17,6 +17,15 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/h/[slug]">
     title: `${hotel.name}, ${t(hotel.town, lang)}`,
     description: t(hotel.tagline, lang),
     ...(hotel.unlisted ? { robots: { index: false, follow: false } } : {}),
+    metadataBase: new URL(SITE.url),
+    // The preview card WhatsApp, Instagram and Facebook show when the link is shared.
+    openGraph: {
+      type: "website",
+      title: hotel.name,
+      description: t(hotel.tagline, lang),
+      locale: LOCALES[lang].replace("-", "_"),
+      ...(hotel.photo ? { images: [{ url: hotel.photo, alt: t(hotel.photoAlt, lang) || hotel.name }] } : {}),
+    },
     alternates: { languages: Object.fromEntries(hotel.languages.map((l) => [l, `/${l}/h/${hotel.slug}`])) },
   };
 }
