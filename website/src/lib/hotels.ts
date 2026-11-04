@@ -35,6 +35,8 @@ export interface Room {
 export interface Hotel {
   slug: string;
   name: string;
+  /** The name as set in the big letters, when shorter than the full name ("Ilhasul" for "Hotel Ilhasul"). */
+  shortName?: string;
   /** Sample hotel: shows made-up bookings so the calendar isn't empty. */
   demo?: boolean;
   /** Hidden: not listed on the sales page and not shown to search engines (e.g. a pitch to a hotel). */
