@@ -10,7 +10,7 @@ import { Portrait } from "./Portrait.tsx";
 
 const DAYS = 14;
 
-type Room = { id: string; number: string; name: string; guests: number };
+type Room = { id: string; number?: string; name: string; guests: number };
 
 // One frame stays in the middle of the screen while the reader scrolls through three stages:
 // the hotel's rooms, its live calendar (which the visitor can tap), and the WhatsApp message that tap writes.
@@ -45,7 +45,7 @@ export function Showcase({
   const link = whatsappLink({
     number: hotel.whatsapp,
     hotel: hotel.name,
-    room: `${fill(dict.roomN, { n: room.number })}, ${room.name}`,
+    room: room.number ? `${fill(dict.roomN, { n: room.number })}, ${room.name}` : room.name,
     stay,
     lang,
     d: dict,
@@ -107,11 +107,11 @@ export function Showcase({
               <tbody>
                 {hotel.rooms.map((r) => (
                   <tr key={r.id}>
-                    <th scope="row">{r.number}</th>
+                    <th scope="row">{r.number ?? r.name.slice(0, 2)}</th>
                     {days.map((d) => {
                       const taken = booked[r.id].has(d);
                       const chosen = pick.room === r.id && d >= pick.day && d < stay.to;
-                      const label = `${fill(dict.roomN, { n: r.number })}, ${formatDate(d, lang, true)}: ${taken ? dict.taken : dict.free}`;
+                      const label = `${r.number ? fill(dict.roomN, { n: r.number }) : r.name}, ${formatDate(d, lang, true)}: ${taken ? dict.taken : dict.free}`;
                       return (
                         <td key={d} className={taken ? "is-taken" : chosen ? "is-chosen" : "is-free"}>
                           {taken ? (

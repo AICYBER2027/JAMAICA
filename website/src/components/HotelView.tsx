@@ -108,6 +108,7 @@ export function HotelView({
         <nav className="h-nav" aria-label={hotel.name}>
           <a href="#rooms">{d.rooms}</a>
           <a href="#availability">{d.availability}</a>
+          {hotel.gallery && hotel.gallery.length > 0 && <a href="#photos">{d.photos}</a>}
           <a href="#location">{d.location}</a>
         </nav>
         <div className="h-bar-end">
@@ -139,7 +140,7 @@ export function HotelView({
         <div className="h-hero-picture">
           {hotel.photo ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={hotel.photo} alt={hotel.name} width={1200} height={1500} />
+            <img src={hotel.photo} alt={t(hotel.photoAlt, lang) || hotel.name} width={1200} height={1500} fetchPriority="high" />
           ) : (
             <PlaceScene name={hotel.scene ?? "sea"} title={`${hotel.name}, ${t(hotel.town, lang)}`} />
           )}
@@ -214,7 +215,7 @@ export function HotelView({
         <ol className="h-room-list">
           {status.map(({ room, taken, fits, free }) => {
             const name = t(room.name, lang);
-            const roomLabel = `${fill(d.roomN, { n: room.number })}, ${name}`;
+            const roomLabel = room.number ? `${fill(d.roomN, { n: room.number })}, ${name}` : name;
             const bookUrl = room.bookingUrl ?? hotel.bookingUrl;
             return (
               <li key={room.id} id={`room-${room.id}`} className={`h-room ${free ? "is-free" : "is-taken"}`}>
@@ -225,13 +226,15 @@ export function HotelView({
                   ) : (
                     <RoomScene name={room.scene ?? "double"} title={name} />
                   )}
-                  <span className="h-room-number" aria-hidden="true">
-                    {room.number}
-                  </span>
+                  {room.number && (
+                    <span className="h-room-number" aria-hidden="true">
+                      {room.number}
+                    </span>
+                  )}
                 </div>
                 <div className="h-room-body">
                   <h3>
-                    <span className="visually-hidden">{fill(d.roomN, { n: room.number })}, </span>
+                    {room.number && <span className="visually-hidden">{fill(d.roomN, { n: room.number })}, </span>}
                     {name}
                   </h3>
                   <p className="h-room-facts">
@@ -242,7 +245,12 @@ export function HotelView({
                 <div className="h-room-side">
                   {room.price != null && (
                     <p className="h-price">
-                      <strong>{formatPrice(room.price, hotel.currency, lang)}</strong> {d.perNight}
+                      <strong>
+                        {room.priceFrom
+                          ? fill(d.fromPrice, { price: formatPrice(room.price, hotel.currency, lang) })
+                          : formatPrice(room.price, hotel.currency, lang)}
+                      </strong>{" "}
+                      {d.perNight}
                     </p>
                   )}
                   <p className="h-status">
@@ -270,6 +278,22 @@ export function HotelView({
           })}
         </ol>
       </section>
+
+      {hotel.gallery && hotel.gallery.length > 0 && (
+        <section id="photos" className="h-gallery" aria-labelledby="photos-title">
+          <h2 id="photos-title">{d.photos}</h2>
+          <ul>
+            {hotel.gallery.map((g) => (
+              <li key={g.src}>
+                <a href={g.src} target="_blank" rel="noopener">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={g.src} alt={t(g.alt, lang)} loading="lazy" width={1400} height={933} />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <section id="availability" className="h-board" aria-labelledby="board-title">
         <div className="h-section-head">
@@ -311,7 +335,7 @@ export function HotelView({
               {hotel.rooms.map((room) => (
                 <tr key={room.id}>
                   <th scope="row">
-                    <span className="h-board-number">{room.number}</span>
+                    {room.number && <span className="h-board-number">{room.number}</span>}
                     <span className="h-board-name">{t(room.name, lang)}</span>
                   </th>
                   {boardDays.map((day) => {

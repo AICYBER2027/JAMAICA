@@ -3,53 +3,258 @@
   "name": "Hotel Ilhasul",
   "demo": true,
   "unlisted": true,
-  "languages": ["pt", "es", "en"],
+  "languages": [
+    "pt",
+    "es",
+    "en"
+  ],
   "timeZone": "America/Sao_Paulo",
   "currency": "BRL",
   "town": "Canasvieiras, Florianópolis",
   "tagline": {
-    "pt": "Piscinas, churrasqueira e a praia de Canasvieiras a dez minutos a pé.",
-    "es": "Piscinas, parrilla y la playa de Canasvieiras a diez minutos a pie.",
-    "en": "Pools, a barbecue and Canasvieiras beach a ten-minute walk away."
+    "pt": "A 40 metros da praia de Canasvieiras, com piscina e vista para o mar.",
+    "es": "A 40 metros de la playa de Canasvieiras, con piscina y vista al mar.",
+    "en": "Forty metres from Canasvieiras beach, with a pool and a view of the sea."
   },
   "about": {
-    "pt": "Um hotel para famílias no norte da Ilha de Santa Catarina, com duas piscinas para adultos, uma para as crianças, sala de jogos e estacionamento grátis. Dá para ir a pé até à praia de Canasvieiras, e Jurerê fica a poucos minutos de carro.",
-    "es": "Un hotel para familias en el norte de la isla de Santa Catarina, con dos piscinas para adultos, una para los chicos, sala de juegos y estacionamiento gratis. Se llega a pie a la playa de Canasvieiras, y Jurerê queda a pocos minutos en auto.",
-    "en": "A family hotel in the north of Santa Catarina Island, with two pools for adults, one for children, a games room and free parking. Canasvieiras beach is within walking distance, and Jurerê is a few minutes' drive."
+    "pt": "Apartamentos com cozinha para até seis pessoas, a 40 m da praia de Canasvieiras. Piscinas para adultos e crianças, deck com espreguiçadeiras, terraço, salão de jogos e churrasqueira. Jurerê Internacional fica a 5 km, o centro de Florianópolis a 20 km e o aeroporto a 30 km. O estacionamento é gratuito.",
+    "es": "Departamentos con cocina para hasta seis personas, a 40 m de la playa de Canasvieiras. Piscinas para adultos y chicos, deck con reposeras, terraza, sala de juegos y parrilla. Jurerê Internacional está a 5 km, el centro de Florianópolis a 20 km y el aeropuerto a 30 km. El estacionamiento es gratis.",
+    "en": "Apartments with a kitchen for up to six people, 40 m from Canasvieiras beach. Pools for adults and children, a deck with sun loungers, a terrace, a games room and a barbecue. Jurerê Internacional is 5 km away, central Florianópolis 20 km and the airport 30 km. Parking is free."
   },
-  "theme": { "ground": "#E6EFF3", "surface": "#D2E3EB", "ink": "#0A2A3B", "accent": "#0A6687", "accentInk": "#FFFFFF", "font": "figtree" },
-  "scene": "sea",
-  "whatsapp": "5548900000000",
-  "bookingUrl": "https://book.omnibees.com/chain/2706/hotel/14111?lang=pt-BR",
-  "address": "Rua Vasco de Oliveira Gondim, 589, Canasvieiras, Florianópolis, SC",
-  "mapUrl": "https://www.google.com/maps/search/?api=1&query=Rua+Vasco+de+Oliveira+Gondim+589+Canasvieiras+Florianopolis",
+  "theme": {
+    "ground": "#EDF2F4",
+    "surface": "#DAE6EB",
+    "ink": "#0B2533",
+    "accent": "#0A5F80",
+    "accentInk": "#FFFFFF",
+    "font": "figtree"
+  },
+  "whatsapp": "5548984444440",
+  "bookingUrl": "https://book.omnibees.com/hotel/14111?lang=pt-BR",
+  "address": "Rua Vasco de Oliveira Gondin, 589, Canasvieiras, Florianópolis, SC, 88054-110",
+  "mapUrl": "https://www.google.com/maps/search/?api=1&query=-27.427872,-48.453476",
   "checkIn": "14:00",
   "checkOut": "10:00",
   "amenities": [
-    { "pt": "Duas piscinas e uma piscina infantil (10h às 22h)", "es": "Dos piscinas y una piscina para chicos (10 a 22 h)", "en": "Two pools and a children's pool (10am to 10pm)" },
-    { "pt": "Churrasqueiras e terraço", "es": "Parrillas y terraza", "en": "Barbecue grills and a terrace" },
-    { "pt": "Sala de jogos", "es": "Sala de juegos", "en": "Games room" },
-    { "pt": "Estacionamento grátis", "es": "Estacionamiento gratis", "en": "Free parking" },
-    { "pt": "Wi-Fi grátis", "es": "Wi-Fi gratis", "en": "Free Wi-Fi" },
-    { "pt": "Café da manhã", "es": "Desayuno", "en": "Breakfast" }
+    {
+      "pt": "Café da manhã incluído",
+      "es": "Desayuno incluido",
+      "en": "Breakfast included"
+    },
+    {
+      "pt": "Piscinas para adultos e crianças",
+      "es": "Piscinas para adultos y chicos",
+      "en": "Pools for adults and children"
+    },
+    {
+      "pt": "Deck com espreguiçadeiras e terraço",
+      "es": "Deck con reposeras y terraza",
+      "en": "Deck with sun loungers and a terrace"
+    },
+    {
+      "pt": "Salão de jogos: sinuca, pebolim e pingue-pongue",
+      "es": "Sala de juegos: pool, metegol y ping-pong",
+      "en": "Games room: pool table, table football and table tennis"
+    },
+    {
+      "pt": "Churrasqueira",
+      "es": "Parrilla",
+      "en": "Barbecue"
+    },
+    {
+      "pt": "Ar-condicionado, TV e Wi-Fi grátis",
+      "es": "Aire acondicionado, TV y Wi-Fi gratis",
+      "en": "Air conditioning, TV and free Wi-Fi"
+    },
+    {
+      "pt": "Estacionamento privativo gratuito",
+      "es": "Estacionamiento privado gratis",
+      "en": "Free private parking"
+    }
   ],
   "rooms": [
-    { "id": "standard", "number": "S", "scene": "double", "guests": 2,
-      "name": { "pt": "Apartamento Standard", "es": "Departamento Standard", "en": "Standard Room" },
-      "beds": { "pt": "Cama de casal", "es": "Cama de matrimonio", "en": "Double bed" },
-      "description": { "pt": "Para casais: perto das piscinas e a dez minutos da praia.", "es": "Para parejas: cerca de las piscinas y a diez minutos de la playa.", "en": "For couples: close to the pools, ten minutes from the beach." } },
-    { "id": "triplo", "number": "T", "scene": "suite", "guests": 3,
-      "name": { "pt": "Apartamento Triplo", "es": "Departamento Triple", "en": "Triple Room" },
-      "beds": { "pt": "Cama de casal e cama de solteiro", "es": "Cama de matrimonio y una individual", "en": "A double and a single bed" },
-      "description": { "pt": "Espaço para três, ideal para pais com um filho.", "es": "Lugar para tres, ideal para padres con un hijo.", "en": "Room for three, right for parents with one child." } },
-    { "id": "familia", "number": "F", "scene": "family", "guests": 5,
-      "name": { "pt": "Apartamento Família", "es": "Departamento Familiar", "en": "Family Room" },
-      "beds": { "pt": "Cama de casal e beliche", "es": "Cama de matrimonio y cucheta", "en": "A double bed and bunk beds" },
-      "description": { "pt": "Para a família toda passar o verão junta.", "es": "Para que toda la familia pase el verano junta.", "en": "For the whole family to spend the summer together." } },
-    { "id": "cozinha", "number": "C", "scene": "twin", "guests": 4,
-      "name": { "pt": "Apartamento com Cozinha", "es": "Departamento con Cocina", "en": "Room with Kitchenette" },
-      "beds": { "pt": "Duas camas de casal", "es": "Dos camas de matrimonio", "en": "Two double beds" },
-      "description": { "pt": "Com cozinha equipada, para estadias mais longas.", "es": "Con cocina equipada, para estadías largas.", "en": "With a fitted kitchenette, for longer stays." } }
+    {
+      "id": "standard",
+      "guests": 6,
+      "price": 250,
+      "priceFrom": true,
+      "photo": "/hotels/ilhasul/apartamento-quarto.jpg",
+      "name": {
+        "pt": "Apartamento Standard",
+        "es": "Departamento Standard",
+        "en": "Standard Apartment"
+      },
+      "beds": {
+        "pt": "Cama de casal e camas de solteiro",
+        "es": "Cama de matrimonio y camas individuales",
+        "en": "A double bed and single beds"
+      },
+      "description": {
+        "pt": "Com ar-condicionado, sala de estar e cozinha com geladeira, fogão e utensílios. TV e banheiro privativo com chuveiro quente. Café da manhã incluído.",
+        "es": "Con aire acondicionado, sala de estar y cocina con heladera, cocina y utensilios. TV y baño privado con agua caliente. Desayuno incluido.",
+        "en": "With air conditioning, a living area and a kitchen with fridge, stove and utensils. TV and a private bathroom with a hot shower. Breakfast included."
+      }
+    },
+    {
+      "id": "luxo",
+      "guests": 6,
+      "price": 400,
+      "priceFrom": true,
+      "photo": "/hotels/ilhasul/vista-mar.jpg",
+      "name": {
+        "pt": "Apartamento Standard Luxo",
+        "es": "Departamento Standard Lujo",
+        "en": "Standard Deluxe Apartment"
+      },
+      "beds": {
+        "pt": "Cama de casal e camas de solteiro, com vista para o mar",
+        "es": "Cama de matrimonio y camas individuales, con vista al mar",
+        "en": "A double bed and single beds, with a sea view"
+      },
+      "description": {
+        "pt": "O mesmo apartamento com cozinha e ar-condicionado, com vista para a praia. Café da manhã incluído.",
+        "es": "El mismo departamento con cocina y aire acondicionado, con vista a la playa. Desayuno incluido.",
+        "en": "The same apartment with a kitchen and air conditioning, looking out over the beach. Breakfast included."
+      }
+    }
   ],
-  "adminPasswordHash": "scrypt$38d3c5df2fbdcbcf9b5ac85d4e3ccaf1$b606ad67a5ab6b43ff8300dd44f3a414d8b2438e00f7c380fcff1ad89680f956"
+  "adminPasswordHash": "scrypt$38d3c5df2fbdcbcf9b5ac85d4e3ccaf1$b606ad67a5ab6b43ff8300dd44f3a414d8b2438e00f7c380fcff1ad89680f956",
+  "photo": "/hotels/ilhasul/piscina-vista-mar.jpg",
+  "photoAlt": {
+    "pt": "A piscina no terraço, com o mar e as ilhas ao fundo",
+    "es": "La piscina en la terraza, con el mar y las islas al fondo",
+    "en": "The terrace pool, with the sea and islands behind"
+  },
+  "email": "ilhasul@uol.com.br",
+  "phone": "+55 48 3266-1100",
+  "gallery": [
+    {
+      "src": "/hotels/ilhasul/piscina.jpg",
+      "alt": {
+        "pt": "Piscina",
+        "es": "Piscina",
+        "en": "Pool"
+      }
+    },
+    {
+      "src": "/hotels/ilhasul/fachada.jpg",
+      "alt": {
+        "pt": "A fachada do hotel em Canasvieiras",
+        "es": "La fachada del hotel en Canasvieiras",
+        "en": "The hotel's front in Canasvieiras"
+      }
+    },
+    {
+      "src": "/hotels/ilhasul/piscina-infantil.jpg",
+      "alt": {
+        "pt": "Piscina infantil",
+        "es": "Piscina para chicos",
+        "en": "Children's pool"
+      }
+    },
+    {
+      "src": "/hotels/ilhasul/cafe-buffet.jpg",
+      "alt": {
+        "pt": "Café da manhã",
+        "es": "Desayuno",
+        "en": "Breakfast"
+      }
+    },
+    {
+      "src": "/hotels/ilhasul/vista-mar.jpg",
+      "alt": {
+        "pt": "Vista para o mar e as ilhas",
+        "es": "Vista al mar y las islas",
+        "en": "View of the sea and islands"
+      }
+    },
+    {
+      "src": "/hotels/ilhasul/piscina-noite.jpg",
+      "alt": {
+        "pt": "A piscina à noite",
+        "es": "La piscina de noche",
+        "en": "The pool at night"
+      }
+    },
+    {
+      "src": "/hotels/ilhasul/churrasqueira.jpg",
+      "alt": {
+        "pt": "Churrasqueira",
+        "es": "Parrilla",
+        "en": "Barbecue"
+      }
+    },
+    {
+      "src": "/hotels/ilhasul/sala-de-jogos.jpg",
+      "alt": {
+        "pt": "Salão de jogos",
+        "es": "Sala de juegos",
+        "en": "Games room"
+      }
+    },
+    {
+      "src": "/hotels/ilhasul/terraco-noite.jpg",
+      "alt": {
+        "pt": "O terraço à noite",
+        "es": "La terraza de noche",
+        "en": "The terrace at night"
+      }
+    },
+    {
+      "src": "/hotels/ilhasul/apartamento-cozinha.jpg",
+      "alt": {
+        "pt": "A cozinha do apartamento",
+        "es": "La cocina del departamento",
+        "en": "The apartment's kitchen"
+      }
+    },
+    {
+      "src": "/hotels/ilhasul/cafe-paes.jpg",
+      "alt": {
+        "pt": "Pães do café da manhã",
+        "es": "Panes del desayuno",
+        "en": "Breakfast breads"
+      }
+    },
+    {
+      "src": "/hotels/ilhasul/sala-de-estar.jpg",
+      "alt": {
+        "pt": "Sala de estar",
+        "es": "Sala de estar",
+        "en": "Lounge"
+      }
+    },
+    {
+      "src": "/hotels/ilhasul/terraco.jpg",
+      "alt": {
+        "pt": "Terraço",
+        "es": "Terraza",
+        "en": "Terrace"
+      }
+    },
+    {
+      "src": "/hotels/ilhasul/cafe-mesa.jpg",
+      "alt": {
+        "pt": "Café da manhã servido",
+        "es": "Desayuno servido",
+        "en": "Breakfast served"
+      }
+    },
+    {
+      "src": "/hotels/ilhasul/apartamento-camas.jpg",
+      "alt": {
+        "pt": "Camas do apartamento",
+        "es": "Camas del departamento",
+        "en": "The apartment's beds"
+      }
+    },
+    {
+      "src": "/hotels/ilhasul/apartamento-quarto.jpg",
+      "alt": {
+        "pt": "Quarto do apartamento",
+        "es": "Dormitorio del departamento",
+        "en": "The apartment's bedroom"
+      }
+    }
+  ]
 }

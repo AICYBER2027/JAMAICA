@@ -18,7 +18,7 @@ export function AdminBoard({
 }: {
   slug: string;
   lang: Lang;
-  rooms: { id: string; number: string; name: string }[];
+  rooms: { id: string; number?: string; name: string }[];
   availability: Availability;
 }) {
   const d = adminDict(lang);
@@ -80,7 +80,7 @@ export function AdminBoard({
         {rooms.map((room) => (
           <div key={room.id} className="a-room">
             <h2>
-              <span className="a-number">{room.number}</span> {room.name}
+              {room.number && <span className="a-number">{room.number}</span>} {room.name}
             </h2>
             <ol className="a-days">
               {days.map((day) => {

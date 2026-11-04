@@ -13,14 +13,16 @@ export type FontName = "bricolage" | "newsreader" | "figtree";
 
 export interface Room {
   id: string;
-  /** What's on the door: "4", "12B". */
-  number: string;
+  /** What's on the door: "4", "12B". Leave out when the entry is a room type, not one room. */
+  number?: string;
   name: Text;
   description: Text;
   beds: Text;
   guests: number;
   /** Price per night, in the hotel's currency. */
   price?: number;
+  /** The price is the lowest of the season ("from R$250"). */
+  priceFrom?: boolean;
   /** A photo in /public (e.g. "/hotels/pousada-mare/room-1.jpg"), or a drawn picture. */
   photo?: string;
   scene?: RoomSceneName;
@@ -48,6 +50,7 @@ export interface Hotel {
   about: Text;
   theme: { ground: string; surface: string; ink: string; accent: string; accentInk: string; font: FontName };
   photo?: string;
+  photoAlt?: Text;
   scene?: SceneName;
   /** International format, digits only: country code + number. */
   whatsapp?: string;
@@ -60,6 +63,8 @@ export interface Hotel {
   checkIn?: string;
   checkOut?: string;
   amenities?: Text[];
+  /** Photos of the place (pool, breakfast, views…), in /public. */
+  gallery?: { src: string; alt: Text }[];
   rooms: Room[];
   /** scrypt hash made with `npm run hash-password`. Without one the admin page stays locked. */
   adminPasswordHash?: string;
