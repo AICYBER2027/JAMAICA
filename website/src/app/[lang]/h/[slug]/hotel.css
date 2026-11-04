@@ -62,7 +62,7 @@
 /* Hero: the town's name in large letters, filled with the hotel's photograph. */
 .pc-hero { padding: clamp(8px, 2vw, 28px) var(--gutter) 0; container-type: inline-size; }
 .pc-greeting { display: block; margin: 0; }
-.pc-script { display: block; font-family: var(--hand); font-weight: 700; font-size: clamp(2rem, 1.2rem + 3.2vw, 4.5rem); line-height: 1; transform: rotate(-3deg); transform-origin: left; margin-left: 0.2em; }
+.pc-script { display: block; margin: 0; font-family: var(--hand); font-weight: 700; font-size: clamp(1.75rem, 1rem + 2.6vw, 3.75rem); line-height: 1.05; transform: rotate(-2deg); transform-origin: left; margin-left: 0.2em; }
 .pc-letters { position: relative; display: block; font-family: var(--display); font-weight: 400; text-transform: uppercase; line-height: 0.84; letter-spacing: -0.01em; white-space: nowrap;
   /* First guess before the script measures and fits it exactly (Bowlby One capitals ~0.72em). */
   font-size: min(calc(100cqi / (var(--letters) * 0.72)), 16rem);

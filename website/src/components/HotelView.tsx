@@ -118,7 +118,7 @@ export function HotelView({
       const stacked = lines.length > 1 && getComputedStyle(lines[0]).display === "block";
       const widest = stacked ? Math.max(...lines.map((l) => l.getBoundingClientRect().width)) : word.getBoundingClientRect().width;
       const ratio = box.clientWidth / widest;
-      box.style.fontSize = `${Math.min(100 * ratio * 0.97, 260)}px`;
+      box.style.fontSize = `${Math.min(100 * ratio * 0.97, 340)}px`;
     };
     fit();
     document.fonts?.ready.then(fit);
@@ -147,7 +147,8 @@ export function HotelView({
   const lowest = prices.length ? Math.min(...prices) : undefined;
   const maxGuests = Math.max(...hotel.rooms.map((r) => r.guests), 4);
   const [place, region] = placeParts(t(hotel.town, lang));
-  const [nameA, nameB] = splitName(place);
+  const bigName = hotel.shortName ?? hotel.name;
+  const [nameA, nameB] = splitName(bigName);
 
   const theme = {
     "--field": hotel.theme.accent,
@@ -162,7 +163,7 @@ export function HotelView({
     "--scene-ground": hotel.theme.ground,
     "--hero-photo": hotel.photo ? `url("${hotel.photo}")` : "none",
     "--hero-focus": hotel.photoFocus ?? "50% 50%",
-    "--letters": String(Math.max(place.length, 6)),
+    "--letters": String(Math.max(bigName.length, 6)),
   } as CSSProperties;
 
   function apply(next: Stay) {
@@ -212,9 +213,12 @@ export function HotelView({
       </header>
 
       <section className="pc-hero" aria-labelledby="hotel-name">
+        <p className="pc-script">
+          {d.greetings} {place}
+        </p>
         <h1 id="hotel-name" className="pc-greeting">
-          <span className="pc-script">{d.greetings}</span>
-          <span ref={lettersRef} className={`pc-letters${hotel.photo ? " has-photo" : ""}`} aria-label={place}>
+          <span className="visually-hidden">{hotel.name}</span>
+          <span ref={lettersRef} className={`pc-letters${hotel.photo ? " has-photo" : ""}`} aria-hidden="true">
             {[0, 1].map((layer) => (
               <span key={layer} className={layer ? "pc-letters-fill" : "pc-letters-keyline"} aria-hidden="true">
                 <span className="pc-line">{nameA}</span>
@@ -222,11 +226,9 @@ export function HotelView({
               </span>
             ))}
           </span>
-          <span className="visually-hidden">{`, ${hotel.name}`}</span>
         </h1>
         <p className="pc-tagline">
-          <strong>{hotel.name}</strong>
-          {region ? `, ${region}. ` : ". "}
+          {region && <strong>{region}. </strong>}
           {t(hotel.tagline, lang)}
         </p>
 
