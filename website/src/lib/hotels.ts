@@ -25,6 +25,8 @@ export interface Room {
   priceFrom?: boolean;
   /** A photo in /public (e.g. "/hotels/pousada-mare/room-1.jpg"), or a drawn picture. */
   photo?: string;
+  /** More photos of this room (bathroom, kitchen, view…), shown as small pictures to tap through. */
+  photos?: { src: string; alt: Text }[];
   scene?: RoomSceneName;
   /** iCal links for this room from Booking.com, Airbnb, Expedia… */
   ical?: string[];
@@ -53,6 +55,8 @@ export interface Hotel {
   theme: { ground: string; surface: string; ink: string; accent: string; accentInk: string; font: FontName };
   photo?: string;
   photoAlt?: Text;
+  /** The hotel's logo, in /public. Shown in the top bar and footer. */
+  logo?: string;
   /** Which part of the main photo to show inside the big letters, as CSS background-position ("50% 30%"). */
   photoFocus?: string;
   scene?: SceneName;
