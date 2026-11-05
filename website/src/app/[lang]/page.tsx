@@ -7,7 +7,7 @@ import { SITE } from "@/lib/site.ts";
 import { LangSwitch } from "@/components/LangSwitch.tsx";
 import { SignupForm } from "@/components/sales/SignupForm.tsx";
 import "@fontsource-variable/figtree";
-import "@fontsource/bowlby-one";
+import "@fontsource/instrument-serif";
 import "./sales.css";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]">): Promise<Metadata> {

@@ -151,7 +151,8 @@
             "en": "Bathroom"
           }
         }
-      ]
+      ],
+      "size": 30
     },
     {
       "id": "luxo",
@@ -422,5 +423,27 @@
     }
   ],
   "photoFocus": "50% 34%",
-  "logo": "/hotels/ilhasul/logo.png"
+  "logo": "/hotels/ilhasul/logo.png",
+  "highlights": [
+    {
+      "pt": "40 m da praia",
+      "es": "A 40 m de la playa",
+      "en": "40 m from the beach"
+    },
+    {
+      "pt": "Café da manhã incluído",
+      "es": "Desayuno incluido",
+      "en": "Breakfast included"
+    },
+    {
+      "pt": "Piscina com vista para o mar",
+      "es": "Piscina con vista al mar",
+      "en": "Pool with a sea view"
+    },
+    {
+      "pt": "Recepção 24 horas",
+      "es": "Recepción 24 horas",
+      "en": "24-hour reception"
+    }
+  ]
 }

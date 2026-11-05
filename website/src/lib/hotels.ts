@@ -19,6 +19,8 @@ export interface Room {
   description: Text;
   beds: Text;
   guests: number;
+  /** Floor area in m². */
+  size?: number;
   /** Price per night, in the hotel's currency. */
   price?: number;
   /** The price is the lowest of the season ("from R$250"). */
@@ -57,6 +59,8 @@ export interface Hotel {
   photoAlt?: Text;
   /** The hotel's logo, in /public. Shown in the top bar and footer. */
   logo?: string;
+  /** Up to four short facts shown under the photo ("40 m from the beach", "Breakfast included"). */
+  highlights?: Text[];
   /** Which part of the main photo to show inside the big letters, as CSS background-position ("50% 30%"). */
   photoFocus?: string;
   scene?: SceneName;
