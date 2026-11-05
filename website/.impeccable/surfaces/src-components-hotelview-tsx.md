@@ -7,18 +7,18 @@ related_targets: ["src/app/[lang]/h/[slug]/hotel.css"]
 
 # Hotel site (template for every hotel)
 
-Scope: /<lang>/h/<slug>, every hotel. Mode: Persuade. Audience: guests on phones (Brazilian families, Argentine and Uruguayan visitors, couples). Action: two equal primaries, WhatsApp with the request pre-written, and the hotel's online booking. Proof: the hotel's own photographs, live free days, real prices.
+Scope: /<lang>/h/<slug>, every hotel. Mode: Persuade. Audience: guests on phones (Brazilian families, Argentine and Uruguayan visitors, couples). Action: two equal primaries, WhatsApp with the request pre-written, and the hotel's online booking.
 
 ## Direction contract
 
-THESIS: The site is a holiday postcard the guest writes to the hotel. It refuses the category default of a full-screen photo slider with a grey booking bar and a grid of room cards.
+THESIS: A modern, photo-led hotel page in the category's standard form, executed at the level of current boutique-hotel and Airbnb listing pages. The user took the standing exit from the postcard direction ("looks like 2009").
 
-OWN-WORLD: Kodachrome tourist postcards of the Brazilian coast. A saturated field in the hotel's colour, white postcard stock with straight printed borders, airmail edging in red and the field colour, perforated stamps, round postmarks, fat large-letter display type filled with the hotel's photographs, the guest's own entries in handwriting. One strong accent (airmail red) marks only what is selected or sent.
+OWN-WORLD: White ground, near-black text, the hotel's accent on actions and selection, Instrument Serif titles over Figtree, pill buttons, 18px cards, real photographs everywhere.
 
-STORY: The visitor sees the place inside its name, learns it is 40 m from the beach and what it costs, picks dates on the back of the card, sees which rooms are free, and sends the card: WhatsApp or online booking.
+STORY: See the place, pick dates, see what's free and the price, message on WhatsApp or book.
 
-FIRST VIEWPORT: Top bar. "Lembranças de" in script, then the town name across the full width in large-letter type filled with the hero photograph. Below it, overlapping the letters' baseline, the back of a postcard: left half dates and guests written by hand, right half a stamp carrying the price, a postmark with the chosen dates, the hotel's address, and two equal buttons.
+FIRST VIEWPORT: A full-bleed hero photo with the logo, nav and language switch; place, name and tagline bottom-left; a white booking card overlapping the photo's bottom edge.
 
-FORM: Vintage tourist postcard, candidate 3 of 7 (beach umbrellas, pool tiles, postcard, Azorean houses, kiosk lettering, bus ticket, Hercílio Luz bridge). seed:3fca341926253cc6. Signature interaction: changing the dates re-stamps the postmark. Raises: from neon, one accent marks only the active run; from Versailles, the scroll is sequenced as one walk from beach to room to day to door.
+FORM: canon (standing exit chosen by the user). seed:3fca341926253cc6.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
