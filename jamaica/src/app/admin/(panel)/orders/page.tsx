@@ -43,7 +43,7 @@ export default async function Orders({ searchParams }: { searchParams: Promise<{
         <button className="btn btn-dark">Search</button>
       </form>
       <div className="mt-6 overflow-x-auto">
-        <table className="table min-w-[860px]">
+        <table className="data-table min-w-[860px]">
           <thead><tr><th>Order</th><th>Placed</th><th>Customer</th><th>Ship to</th><th>Payment</th><th>Status</th><th className="num">Items</th><th className="num">Total</th></tr></thead>
           <tbody>
             {rows.map((o) => (

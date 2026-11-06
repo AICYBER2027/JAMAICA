@@ -62,7 +62,7 @@ export default async function Products({ searchParams }: { searchParams: Promise
 
       <p className="tabular mt-6 text-small text-muted">{rows.length} products</p>
       <div className="mt-2 overflow-x-auto">
-        <table className="table min-w-[760px]">
+        <table className="data-table min-w-[760px]">
           <thead>
             <tr><th className="w-14"><span className="sr-only">Photo</span></th><th>Product</th><th>Category</th><th>Status</th><th>Views</th><th className="num">Price</th><th className="num">Stock</th></tr>
           </thead>

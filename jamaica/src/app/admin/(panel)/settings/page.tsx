@@ -51,7 +51,7 @@ export default async function Settings() {
         <p className="mt-1 max-w-[70ch] text-muted">Used at checkout for each Brazilian region (worked out from the customer’s CEP){i.melhorEnvio ? ". Melhor Envio is connected, so live carrier quotes are shown first and these are the fallback" : ""}.</p>
         <ActionForm action={saveShippingRates} submit="Save rates" className="mt-5 grid gap-4">
           <div className="overflow-x-auto">
-            <table className="table min-w-[760px]">
+            <table className="data-table min-w-[760px]">
               <thead><tr><th>Region</th><th>Standard (R$)</th><th>Days</th><th>Express (R$)</th><th>Days</th><th>Free standard from (R$)</th></tr></thead>
               <tbody>
                 {rates.map((r) => (

@@ -87,7 +87,7 @@ export default async function Overview({ searchParams }: { searchParams: Promise
             {toPrepare.length === 0 ? (
               <p className="mt-4 text-muted">Nothing waiting. New paid orders show up here first.</p>
             ) : (
-              <table className="table mt-3">
+              <table className="data-table mt-3">
                 <thead><tr><th>Order</th><th>Customer</th><th>Status</th><th className="num">Total</th></tr></thead>
                 <tbody>
                   {toPrepare.map((o) => (
@@ -111,7 +111,7 @@ export default async function Overview({ searchParams }: { searchParams: Promise
             <h2 id="low-title" className="text-[1.25rem]" style={{ fontStretch: "100%", letterSpacing: 0 }}>Running low</h2>
             <Link href="/admin/inventory?low=1" className="link text-small font-semibold">Update stock</Link>
           </div>
-          <table className="table mt-3">
+          <table className="data-table mt-3">
             <thead><tr><th>Product</th><th>Colour</th><th>Size</th><th className="num">In stock</th></tr></thead>
             <tbody>
               {low.map((v) => (

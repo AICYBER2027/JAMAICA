@@ -32,7 +32,7 @@ export default async function AdminOrder({ params }: { params: Promise<{ id: str
         <div>
           <OrderActions orderId={order.id} status={order.status} next={NEXT_STATUS[order.status]} paymentMethod={order.payment_method} tracking={order.tracking_code ?? ""} />
           <h2 className="mt-10 text-[1.25rem]">Items to pack</h2>
-          <table className="table mt-3">
+          <table className="data-table mt-3">
             <thead><tr><th><span className="sr-only">Photo</span></th><th>Product</th><th>Colour</th><th>Size</th><th className="num">Qty</th><th className="num">Price</th></tr></thead>
             <tbody>
               {order.items.map((i) => (

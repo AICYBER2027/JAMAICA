@@ -91,8 +91,9 @@ export function CheckoutForm({ prefill, methods, signedIn }: { prefill: Prefill;
     }
   };
 
-  const input = (k: keyof typeof f, label: string, props: React.InputHTMLAttributes<HTMLInputElement> = {}, hint?: string) => (
-    <label className={props.className}>
+  // `className` places the field in the grid; the input itself always keeps the field style.
+  const input = (k: keyof typeof f, label: string, { className, ...props }: React.InputHTMLAttributes<HTMLInputElement> = {}, hint?: string) => (
+    <label className={className}>
       <span className="label">{label}</span>
       <input name={k} value={f[k]} onChange={set(k)} className="field" aria-invalid={invalid(k)} aria-describedby={hint ? `${k}-hint` : undefined} {...props} />
       {hint && <span id={`${k}-hint`} className="hint block">{hint}</span>}

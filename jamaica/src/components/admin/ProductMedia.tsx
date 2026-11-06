@@ -122,7 +122,7 @@ export function VariantsEditor({ productId, variants }: { productId: string; var
               <h3 className="text-[1.05rem] tracking-normal" style={{ fontStretch: "100%" }}>{colour}</h3>
               <span className="tabular text-small text-muted">{rows.reduce((n, r) => n + r.stock, 0)} in stock</span>
             </div>
-            <table className="table mt-2">
+            <table className="data-table mt-2">
               <thead><tr><th>Size</th><th>SKU</th><th className="num">Stock</th><th><span className="sr-only">Remove</span></th></tr></thead>
               <tbody>
                 {sorted.map((v) => (

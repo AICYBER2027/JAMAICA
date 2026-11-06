@@ -57,7 +57,7 @@ export function RevenueChart({ data, title }: { data: { day: string; revenue: nu
       {empty && <p className="mt-2 text-small text-muted">No paid orders in this period yet. Revenue appears here as soon as a payment is confirmed.</p>}
       <details className="mt-3 text-small">
         <summary className="cursor-pointer text-muted">Show as table</summary>
-        <table className="table mt-2">
+        <table className="data-table mt-2">
           <thead><tr><th>Day</th><th className="num">Orders</th><th className="num">Revenue</th></tr></thead>
           <tbody>
             {data.map((d) => (

@@ -12,14 +12,14 @@ export default async function Shipping() {
     <Prose title="Shipping and returns" intro="We ship from São Paulo to every Brazilian state. Orders leave within two working days of payment.">
       <h2>Delivery prices</h2>
       <p>Checkout shows the exact price for your CEP. These are our standard rates:</p>
-      <table className="table">
+      <div className="overflow-x-auto"><table className="data-table min-w-[560px]">
         <thead><tr><th>Region</th><th className="num">Standard</th><th className="num">Express</th><th>Free standard from</th></tr></thead>
         <tbody>
           {rates.map((r) => (
             <tr key={r.label}><td>{r.label}</td><td className="num">{formatBRL(r.standard_cents)}, {r.standard_days} days</td><td className="num">{formatBRL(r.express_cents)}, {r.express_days} days</td><td>{r.free_over_cents ? formatBRL(r.free_over_cents) : "–"}</td></tr>
           ))}
         </tbody>
-      </table>
+      </table></div>
       <p>Days are working days after dispatch. When your order ships, its page shows a Correios tracking code.</p>
       <h2 id="sizes">Sizes</h2>
       <p>Clothing uses international sizes (XS to XL); trousers and jeans use Brazilian waist sizes (36 to 46); shoes use Brazilian shoe sizes (34 to 44). Each product page lists what’s in stock in each size.</p>

@@ -88,7 +88,7 @@ export function OutfitBuilder({ products, initial, tryonEnabled }: { products: O
     <div className="grid gap-10 lg:grid-cols-12">
       <div className="lg:col-span-6">
         <div className="lg:sticky lg:top-[calc(var(--header-h)+16px)]">
-          <div className="relative aspect-[4/5] overflow-hidden bg-stone" aria-label="Your look, laid out" role="img">
+          <div className={`relative overflow-hidden bg-stone transition-[height] ${pieces.length ? "aspect-[4/5]" : "h-32 lg:h-auto lg:aspect-[4/5]"}`} aria-label="Your look, laid out" role="img">
             <LayoutGroup>
               <AnimatePresence>
                 {pieces.map((p) => {

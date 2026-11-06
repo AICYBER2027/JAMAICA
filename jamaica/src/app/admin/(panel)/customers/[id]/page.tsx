@@ -32,7 +32,7 @@ export default async function Customer({ params }: { params: Promise<{ id: strin
       </dl>
       <h2 className="mt-10 text-[1.25rem]">Orders</h2>
       {orders.length === 0 ? <p className="mt-3 text-muted">No orders yet.</p> : (
-        <table className="table mt-3">
+        <table className="data-table mt-3">
           <thead><tr><th>Order</th><th>Date</th><th>Ship to</th><th>Status</th><th className="num">Total</th></tr></thead>
           <tbody>
             {orders.map((o) => (

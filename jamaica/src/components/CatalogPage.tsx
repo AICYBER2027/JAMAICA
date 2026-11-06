@@ -64,7 +64,7 @@ export async function CatalogPage({ department, category, filters, title, intro 
           <nav aria-label={`${dept?.name} categories`} className="-mx-[var(--gutter)] mt-10 overflow-x-auto px-[var(--gutter)] [scrollbar-width:none]">
             <ul className="flex gap-3 pb-1">
               <li>
-                <Link href={`/shop/${department}`} aria-current={!category ? "page" : undefined} className={`flex h-full items-end whitespace-nowrap px-4 py-3 font-semibold ${!category ? "bg-ink text-white" : "bg-stone hover:bg-stone-2"}`}>
+                <Link href={`/shop/${department}`} aria-current={!category ? "page" : undefined} className={`flex h-full items-center whitespace-nowrap px-4 py-3 font-semibold ${!category ? "bg-ink text-white" : "bg-stone hover:bg-stone-2"}`}>
                   All {dept?.name.toLowerCase()}
                 </Link>
               </li>
@@ -88,14 +88,14 @@ export async function CatalogPage({ department, category, filters, title, intro 
 
         <div className="mt-10">
           <Suspense>
-            <Filters facets={facets} total={products.length} showQuery={!department} />
+            <Filters facets={department ? facets : { ...facets, sizes: [] }} total={products.length} showQuery={!department} />
           </Suspense>
         </div>
 
         {products.length === 0 ? (
           <div className="mt-16 max-w-[44ch]">
-            <h2 className="text-[1.75rem]">Nothing matches those filters</h2>
-            <p className="mt-3 text-muted">Try another size or colour, or clear the filters to see everything in {category?.name.toLowerCase() ?? dept?.name.toLowerCase() ?? "the store"}.</p>
+            <h2 className="text-[1.75rem]">{filters.q ? `Nothing matches “${filters.q}”` : "Nothing matches those filters"}</h2>
+            <p className="mt-3 text-muted">{filters.q ? "Check the spelling, try a broader word like “jacket” or “watch”, or browse a department." : `Try another size or colour, or clear the filters to see everything in ${category?.name.toLowerCase() ?? dept?.name.toLowerCase() ?? "the store"}.`}</p>
             <Link href={category ? `/shop/${department}/${category.slug}` : department ? `/shop/${department}` : "/search"} className="btn btn-dark mt-6">Clear filters</Link>
           </div>
         ) : (

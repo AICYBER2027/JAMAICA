@@ -31,7 +31,7 @@ export default async function Customers({ searchParams }: { searchParams: Promis
       <h1 className="admin-title">Customers</h1>
       <form method="get" className="mt-6 flex gap-3"><input name="q" type="search" defaultValue={q} placeholder="Name or email" className="field max-w-sm" aria-label="Search customers" /><button className="btn btn-dark">Search</button></form>
       <div className="mt-6 overflow-x-auto">
-        <table className="table min-w-[720px]">
+        <table className="data-table min-w-[720px]">
           <thead><tr><th>Name</th><th>Email</th><th>Account</th><th className="num">Paid orders</th><th className="num">Spent</th><th>Last order</th></tr></thead>
           <tbody>
             {rows.map((r) => (

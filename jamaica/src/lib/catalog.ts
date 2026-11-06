@@ -127,8 +127,9 @@ export async function getFacets(where: { department?: Department; category?: str
     select
       coalesce(array_agg(distinct v.size), '{}') as sizes,
       coalesce((
-        select json_agg(jsonb_build_object('name', name, 'hex', hex) order by name)
-        from (select v2.color as name, min(v2.color_hex) as hex from product_variants v2 where v2.product_id = any(array_agg(p.id)) group by v2.color) cc
+        select json_agg(jsonb_build_object('name', name, 'hex', hex) order by n desc, name)
+        from (select v2.color as name, min(v2.color_hex) as hex, count(distinct v2.product_id) as n from product_variants v2
+              where v2.product_id = any(array_agg(p.id)) group by v2.color order by n desc, v2.color limit 16) cc
       ), '[]') as colors,
       coalesce(min(coalesce(p.sale_price_cents, p.price_cents)), 0)::int as min,
       coalesce(max(coalesce(p.sale_price_cents, p.price_cents)), 0)::int as max

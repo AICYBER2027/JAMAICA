@@ -34,7 +34,7 @@ export function InventoryTable({ rows }: { rows: Row[] }) {
         <p aria-live="polite" className="text-small font-semibold text-emerald">{msg}</p>
       </div>
       <div className="overflow-x-auto">
-        <table className="table min-w-[640px]">
+        <table className="data-table min-w-[640px]">
           <thead><tr><th>Product</th><th>Colour</th><th>Size</th><th>SKU</th><th className="num">Stock</th></tr></thead>
           <tbody>
             {rows.map((r) => {

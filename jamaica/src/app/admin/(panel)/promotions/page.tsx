@@ -42,7 +42,7 @@ export default async function Promotions() {
         </ActionForm>
       </section>
       <div className="mt-10 overflow-x-auto">
-        <table className="table min-w-[720px]">
+        <table className="data-table min-w-[720px]">
           <thead><tr><th>Code</th><th>Discount</th><th>Valid</th><th className="num">Used</th><th>Status</th></tr></thead>
           <tbody>
             {codes.map((c) => (

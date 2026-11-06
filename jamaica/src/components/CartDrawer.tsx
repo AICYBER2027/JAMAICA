@@ -9,11 +9,11 @@ import { formatBRL } from "@/lib/money";
 export function QtyStepper({ qty, onChange, label }: { qty: number; onChange: (q: number) => void; label: string }) {
   return (
     <div className="inline-flex items-center bg-stone" role="group" aria-label={`Quantity of ${label}`}>
-      <button type="button" className="h-9 w-9 text-lg hover:bg-stone-2" onClick={() => onChange(qty - 1)} aria-label="One fewer">
+      <button type="button" className="h-11 w-11 text-lg hover:bg-stone-2" onClick={() => onChange(qty - 1)} aria-label="One fewer">
         −
       </button>
       <span className="tabular w-7 text-center text-[0.95rem]" aria-live="polite">{qty}</span>
-      <button type="button" className="h-9 w-9 text-lg hover:bg-stone-2 disabled:opacity-40" onClick={() => onChange(qty + 1)} disabled={qty >= 10} aria-label="One more">
+      <button type="button" className="h-11 w-11 text-lg hover:bg-stone-2 disabled:opacity-40" onClick={() => onChange(qty + 1)} disabled={qty >= 10} aria-label="One more">
         +
       </button>
     </div>

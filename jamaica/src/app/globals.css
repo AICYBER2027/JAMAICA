@@ -60,13 +60,15 @@
   }
   p { text-wrap: pretty; }
   :focus-visible {
-    outline: 2px solid var(--color-emerald-bright);
+    outline: 2px solid var(--color-emerald);
     outline-offset: 3px;
   }
   ::selection { background: var(--color-emerald); color: white; }
   button, [role="button"], a { touch-action: manipulation; }
   input, select, textarea { font-size: 16px; }
   img { user-select: none; -webkit-user-drag: none; }
+  /* Grid items may shrink below their content (scrolling rows, charts, tables), so nothing pushes a page sideways. */
+  :where(.grid) > * { min-width: 0; }
 }
 
 @layer components {
@@ -129,12 +131,17 @@
   .admin-page { padding: 28px var(--gutter) 80px; max-width: 1360px; }
   .admin-title { font-size: clamp(1.75rem, 2.4vw, 2.25rem); }
   .panel { background: var(--color-stone); padding: 20px; }
-  .table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
-  .table th { text-align: left; font-weight: 600; font-size: var(--text-small); color: var(--color-muted); padding: 10px 12px; border-bottom: 1.5px solid var(--color-ink); white-space: nowrap; }
-  .table td { padding: 12px; border-bottom: 1px solid var(--color-stone-2); vertical-align: middle; }
-  .table tbody tr { transition: background-color 120ms; }
-  .table tbody tr:hover { background: #f6f7f6; }
-  .table .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .data-table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+  .data-table th { text-align: left; font-weight: 600; font-size: var(--text-small); color: var(--color-muted); padding: 10px 12px; border-bottom: 1.5px solid var(--color-ink); white-space: nowrap; }
+  .data-table td { padding: 12px; border-bottom: 1px solid var(--color-stone-2); vertical-align: middle; }
+  .data-table tbody tr { transition: background-color 120ms; }
+  .data-table tbody tr:hover { background: #f6f7f6; }
+  .data-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+  /* On phones a wide table scrolls inside itself instead of pushing the page sideways. */
+  @media (max-width: 640px) {
+    .data-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .data-table th, .data-table td { white-space: nowrap; }
+  }
   .status { display: inline-block; padding: 2px 8px; font-size: var(--text-small); font-weight: 600; white-space: nowrap; }
   .status-pending_payment { background: #fff3d6; color: #6b4b00; }
   .status-paid { background: #dff3ea; color: #0b5a3e; }
@@ -156,3 +163,4 @@
   .prose-j a { text-decoration: underline; text-underline-offset: 0.2em; }
   .prose-j table { margin-top: 1rem; }
 }
+

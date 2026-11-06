@@ -24,7 +24,7 @@ export default async function Reports({ searchParams }: { searchParams: Promise<
         </nav>
       </div>
       <p className="mt-2 text-muted">Counts orders whose payment was received. Compared with the {days} days before.</p>
-      <table className="table mt-6 max-w-[760px]">
+      <table className="data-table mt-6 max-w-[760px]">
         <thead><tr><th>Measure</th><th className="num">Last {days} days</th><th className="num">The {days} days before</th><th className="num">Change</th></tr></thead>
         <tbody>
           <tr><td>Revenue</td><td className="num font-semibold">{formatBRL(now.revenue)}</td><td className="num">{formatBRL(before.revenue)}</td><td className="num">{pct(now.revenue, before.revenue)}</td></tr>
@@ -38,14 +38,14 @@ export default async function Reports({ searchParams }: { searchParams: Promise<
         <section aria-labelledby="top-title">
           <h2 id="top-title" className="text-[1.25rem]">Best-selling products</h2>
           {top.length === 0 ? <p className="mt-3 text-muted">No sales in this period.</p> : (
-            <table className="table mt-3"><thead><tr><th>Product</th><th className="num">Units</th><th className="num">Revenue</th></tr></thead>
+            <table className="data-table mt-3"><thead><tr><th>Product</th><th className="num">Units</th><th className="num">Revenue</th></tr></thead>
               <tbody>{top.map((t) => <tr key={t.name}><td>{t.name}</td><td className="num">{t.units}</td><td className="num">{formatBRL(t.revenue)}</td></tr>)}</tbody></table>
           )}
         </section>
         <section aria-labelledby="cat-title">
           <h2 id="cat-title" className="text-[1.25rem]">By category</h2>
           {cats.length === 0 ? <p className="mt-3 text-muted">No sales in this period.</p> : (
-            <table className="table mt-3"><thead><tr><th>Category</th><th className="num">Units</th><th className="num">Revenue</th></tr></thead>
+            <table className="data-table mt-3"><thead><tr><th>Category</th><th className="num">Units</th><th className="num">Revenue</th></tr></thead>
               <tbody>{cats.map((c) => <tr key={c.category}><td>{c.category}</td><td className="num">{c.units}</td><td className="num">{formatBRL(c.revenue)}</td></tr>)}</tbody></table>
           )}
         </section>
