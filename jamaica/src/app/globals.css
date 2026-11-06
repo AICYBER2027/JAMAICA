@@ -146,3 +146,13 @@
   .status-draft { background: #fff3d6; color: #6b4b00; }
   .status-archived { background: var(--color-stone-2); color: var(--color-muted); }
 }
+
+@layer components {
+  .prose-j h2 { font-size: 1.5rem; margin-top: 2.75rem; margin-bottom: 0.75rem; scroll-margin-top: 90px; }
+  .prose-j p, .prose-j li { font-size: 1.0625rem; line-height: 1.65; }
+  .prose-j p + p { margin-top: 0.9rem; }
+  .prose-j ul { margin-top: 0.75rem; list-style: square; padding-left: 1.25rem; }
+  .prose-j li + li { margin-top: 0.35rem; }
+  .prose-j a { text-decoration: underline; text-underline-offset: 0.2em; }
+  .prose-j table { margin-top: 1rem; }
+}
