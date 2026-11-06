@@ -123,3 +123,26 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ── Dashboard ─────────────────────────────────────────────────────────── */
+@layer components {
+  .admin-page { padding: 28px var(--gutter) 80px; max-width: 1360px; }
+  .admin-title { font-size: clamp(1.75rem, 2.4vw, 2.25rem); }
+  .panel { background: var(--color-stone); padding: 20px; }
+  .table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+  .table th { text-align: left; font-weight: 600; font-size: var(--text-small); color: var(--color-muted); padding: 10px 12px; border-bottom: 1.5px solid var(--color-ink); white-space: nowrap; }
+  .table td { padding: 12px; border-bottom: 1px solid var(--color-stone-2); vertical-align: middle; }
+  .table tbody tr { transition: background-color 120ms; }
+  .table tbody tr:hover { background: #f6f7f6; }
+  .table .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .status { display: inline-block; padding: 2px 8px; font-size: var(--text-small); font-weight: 600; white-space: nowrap; }
+  .status-pending_payment { background: #fff3d6; color: #6b4b00; }
+  .status-paid { background: #dff3ea; color: #0b5a3e; }
+  .status-preparing { background: #e1ecf7; color: #18406b; }
+  .status-shipped { background: #e6e1f7; color: #3c2a7a; }
+  .status-delivered { background: var(--color-ink); color: white; }
+  .status-cancelled, .status-refunded { background: var(--color-stone-2); color: var(--color-muted); }
+  .status-active { background: #dff3ea; color: #0b5a3e; }
+  .status-draft { background: #fff3d6; color: #6b4b00; }
+  .status-archived { background: var(--color-stone-2); color: var(--color-muted); }
+}
