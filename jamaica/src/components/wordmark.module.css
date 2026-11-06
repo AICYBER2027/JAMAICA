@@ -1,0 +1,27 @@
+.mark {
+  display: inline-block;
+  font-weight: 700;
+  font-variation-settings: "wdth" 125;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.animate {
+  animation: open 1100ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
+}
+
+@keyframes open {
+  from {
+    font-variation-settings: "wdth" 62;
+    letter-spacing: -0.04em;
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
+  }
+  to {
+    font-variation-settings: "wdth" 125;
+    letter-spacing: 0.02em;
+  }
+}
