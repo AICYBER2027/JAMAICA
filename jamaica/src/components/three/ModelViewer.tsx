@@ -1,7 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const ModelScene = dynamic(() => import("./ModelScene"), { ssr: false });
 
@@ -40,19 +40,32 @@ type Props = {
 export function ModelViewer({ url, poster, posterAlt = "", variant, hero, className = "", tilt, label, zoomSignal, resetSignal, onInteract, onCapability }: Props) {
   const capable = use3DCapable();
   const [ready, setReady] = useState(false);
+  // Render only while on screen and the tab is visible: saves battery and keeps scrolling smooth on phones.
+  const box = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(true);
+  useEffect(() => {
+    const el = box.current;
+    if (!el) return;
+    let onScreen = true;
+    const update = () => setVisible(onScreen && !document.hidden);
+    const io = new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; update(); }, { rootMargin: "100px" });
+    io.observe(el);
+    document.addEventListener("visibilitychange", update);
+    return () => { io.disconnect(); document.removeEventListener("visibilitychange", update); };
+  }, []);
 
   useEffect(() => {
     if (capable !== null) onCapability?.(capable);
   }, [capable, onCapability]);
 
   return (
-    <div className={`relative h-full w-full ${className}`} role="img" aria-label={label}>
+    <div ref={box} className={`relative h-full w-full ${className}`} role="img" aria-label={label}>
       {poster && (!ready || capable === false) && (
         <Image src={poster} alt={posterAlt} fill sizes="(min-width: 1024px) 50vw, 100vw" className={`object-contain transition-opacity duration-500 ${capable && !ready ? "opacity-60" : ""}`} priority={hero} />
       )}
       {capable && (
         <div className={`absolute inset-0 transition-opacity duration-700 ${ready ? "opacity-100" : "opacity-0"}`} style={{ cursor: "grab" }}>
-          <ModelScene url={url} variant={variant} hero={hero} tilt={tilt} onReady={() => setReady(true)} zoomSignal={zoomSignal} resetSignal={resetSignal} onInteract={onInteract} />
+          <ModelScene active={visible} url={url} variant={variant} hero={hero} tilt={tilt} onReady={() => setReady(true)} zoomSignal={zoomSignal} resetSignal={resetSignal} onInteract={onInteract} />
         </div>
       )}
     </div>

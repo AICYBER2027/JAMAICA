@@ -44,8 +44,17 @@ export async function loadImage(url: string): Promise<Buffer> {
     return obj.body;
   }
   if (url.startsWith("/")) {
-    if (url.includes("..")) throw new Error("Bad path");
-    return readFile(join(process.cwd(), "public", url));
+    if (url.includes("..") || !/^\/(catalog|models)\//.test(url)) throw new Error("Bad path");
+    try {
+      return await readFile(/*turbopackIgnore: true*/ join(process.cwd(), "public", url));
+    } catch {
+      // On Vercel, files in public/ are served by the CDN, not bundled with functions.
+      const site = process.env.SITE_URL;
+      if (!site) throw new Error("SITE_URL is needed to load catalogue images");
+      const res = await fetch(new URL(url, site), { signal: AbortSignal.timeout(15000) });
+      if (!res.ok) throw new Error(`Image fetch failed: ${res.status}`);
+      return Buffer.from(await res.arrayBuffer());
+    }
   }
   const supabase = process.env.SUPABASE_URL;
   if (!supabase || !url.startsWith(supabase)) throw new Error("Image host not allowed");

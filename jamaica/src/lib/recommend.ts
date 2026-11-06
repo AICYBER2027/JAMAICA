@@ -36,7 +36,10 @@ export function conflicts(slot: Slot): Slot[] {
 export function score(candidate: Piece, chosen: Piece[], gender: "women" | "men" | "all"): number {
   if (candidate.inStock === false) return -1;
   let s = 0;
-  if (gender !== "all") s += candidate.gender === gender ? 0.3 : candidate.gender === "unisex" ? 0.2 : -1;
+  if (gender !== "all") {
+    if (candidate.gender !== gender && candidate.gender !== "unisex") return -1; // never suggest the wrong line
+    s += candidate.gender === gender ? 0.3 : 0.2;
+  }
   const others = chosen.filter((c) => c.id !== candidate.id && c.slot !== candidate.slot);
   if (others.length) {
     s += others.reduce((n, o) => n + harmony(String(candidate.palette), String(o.palette)), 0) / others.length;

@@ -18,7 +18,8 @@ const BUCKETS: Record<Bucket, string> = {
   public: process.env.SUPABASE_PUBLIC_BUCKET || "media",
   private: process.env.SUPABASE_PRIVATE_BUCKET || "private",
 };
-const LOCAL_ROOT = resolve(process.env.STORAGE_DIR || "storage");
+// Local storage is for development only; excluded from Vercel's file tracing.
+const LOCAL_ROOT = resolve(/*turbopackIgnore: true*/ process.cwd(), process.env.STORAGE_DIR || "storage");
 
 export const storageMode = (): "supabase" | "local" => (SUPABASE_URL && SUPABASE_KEY ? "supabase" : "local");
 
@@ -67,17 +68,17 @@ export async function putObject(bucket: Bucket, path: string, body: Buffer, cont
     await supabase("POST", `/object/${BUCKETS[bucket]}/${path}`, { body: new Uint8Array(body), headers: { "Content-Type": contentType, "x-upsert": "true", "cache-control": "31536000" } });
     return;
   }
-  const file = join(LOCAL_ROOT, bucket, path);
-  await mkdir(dirname(file), { recursive: true });
-  await writeFile(file, body);
-  await writeFile(file + ".type", contentType);
+  const file = join(/*turbopackIgnore: true*/ LOCAL_ROOT, bucket, path);
+  await mkdir(/*turbopackIgnore: true*/ dirname(file), { recursive: true });
+  await writeFile(/*turbopackIgnore: true*/ file, body);
+  await writeFile(/*turbopackIgnore: true*/ file + ".type", contentType);
 }
 
 export async function readLocalObject(bucket: Bucket, path: string): Promise<{ body: Buffer; type: string } | null> {
   try {
-    const file = join(LOCAL_ROOT, bucket, cleanPath(path));
+    const file = join(/*turbopackIgnore: true*/ LOCAL_ROOT, bucket, cleanPath(path));
     if (!file.startsWith(join(LOCAL_ROOT, bucket))) return null;
-    const [body, type] = await Promise.all([readFile(file), readFile(file + ".type", "utf8").catch(() => "application/octet-stream")]);
+    const [body, type] = await Promise.all([readFile(/*turbopackIgnore: true*/ file), readFile(/*turbopackIgnore: true*/ file + ".type", "utf8").catch(() => "application/octet-stream")]);
     return { body, type };
   } catch {
     return null;
@@ -90,9 +91,9 @@ export async function deleteObject(bucket: Bucket, path: string): Promise<void> 
     await supabase("DELETE", `/object/${BUCKETS[bucket]}`, { body: JSON.stringify({ prefixes: [path] }), headers: { "Content-Type": "application/json" } });
     return;
   }
-  const file = join(LOCAL_ROOT, bucket, path);
-  await rm(file, { force: true });
-  await rm(file + ".type", { force: true });
+  const file = join(/*turbopackIgnore: true*/ LOCAL_ROOT, bucket, path);
+  await rm(/*turbopackIgnore: true*/ file, { force: true });
+  await rm(/*turbopackIgnore: true*/ file + ".type", { force: true });
 }
 
 /** Read a private object's bytes (used to send a customer's photo to the try-on provider). */

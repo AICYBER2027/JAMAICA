@@ -65,7 +65,7 @@ export function BuyBox({ product, variants, colors, color, onColor, colorImages 
               className="relative grid h-12 w-12 place-items-center bg-stone"
             >
               <span className="block h-7 w-7 ring-1 ring-black/10" style={{ background: c.hex }} />
-              {c.name === color && <motion.span layoutId="colour-ring" className="absolute inset-0 ring-2 ring-ink" transition={{ type: "spring", stiffness: 520, damping: 36 }} />}
+              {c.name === color && <motion.span layoutId="colour-ring" className="absolute inset-0 border-2 border-ink" transition={{ type: "spring", stiffness: 520, damping: 36 }} />}
             </button>
           ))}
         </div>

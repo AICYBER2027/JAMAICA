@@ -23,7 +23,7 @@ export function ProductCard({ p, priority = false, sizes = "(min-width: 1280px) 
       <div className="mt-3 flex items-start justify-between gap-3">
         <h3 className="text-[1rem] font-semibold leading-snug tracking-normal group-hover:text-emerald" style={{ fontStretch: "100%" }}>{p.name}</h3>
       </div>
-      <Price p={p} className="mt-0.5 text-[0.95rem]" />
+      <Price p={p} className="mt-0.5 text-[1rem]" />
       <div className="mt-2 flex items-center gap-2">
         <span className="flex gap-1" aria-label={`${p.colors.length} ${p.colors.length === 1 ? "colour" : "colours"}: ${p.colors.map((c) => c.name).join(", ")}`}>
           {p.colors.slice(0, 5).map((c) => (

@@ -4,6 +4,7 @@ import { HeroObject } from "@/components/home/HeroObject";
 import { Chapters } from "@/components/home/Chapters";
 import { PhotoList } from "@/components/home/PhotoList";
 import { SpinFrame } from "@/components/home/SpinFrame";
+import { Reveal, RevealItem } from "@/components/Reveal";
 import { Footer } from "@/components/Footer";
 import { bestSellers, getProduct, listProducts } from "@/lib/catalog";
 import { formatBRL, effectivePrice } from "@/lib/money";
@@ -83,6 +84,27 @@ export default async function Home() {
         ]}
       />
 
+      <section aria-labelledby="look-title" className="frame pt-[clamp(80px,12vw,200px)]">
+        <Reveal className="grid gap-4 md:grid-cols-12 md:gap-6">
+          <RevealItem className="md:col-span-5">
+            <h2 id="look-title" className="text-[clamp(2rem,3.4vw,3.1rem)]">Seen this season</h2>
+            <p className="mt-4 max-w-[38ch] text-lead leading-snug">Tailoring with soft shoulders, washed denim, and colour kept for one piece at a time.</p>
+          </RevealItem>
+          {[
+            { src: "/catalog/ed-milan.jpg", alt: "A woman in a pale blue coat and a pink bag in front of a cathedral", href: "/shop/fashion/jackets", label: "Coats and jackets", cls: "md:col-span-5 md:col-start-8 md:row-span-2 aspect-[3/4]" },
+            { src: "/catalog/ed-tailored.jpg", alt: "A man in a tan suede jacket, white shirt and jeans", href: "/shop/fashion/jeans", label: "Denim", cls: "md:col-span-3 md:col-start-1 aspect-[4/5]" },
+            { src: "/catalog/ed-suit.jpg", alt: "A checked suit and a white jacket on mannequins in a shop window", href: "/shop/fashion/outfits", label: "Complete outfits", cls: "md:col-span-3 aspect-[4/5]" },
+          ].map((x) => (
+            <RevealItem key={x.src} className={x.cls}>
+              <Link href={x.href} className="group relative block h-full overflow-hidden bg-stone">
+                <Image src={x.src} alt={x.alt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]" />
+                <span className="absolute bottom-0 left-0 bg-white px-3 py-2 font-semibold">{x.label}</span>
+              </Link>
+            </RevealItem>
+          ))}
+        </Reveal>
+      </section>
+
       <PhotoList
         heading="New arrivals, best sellers and offers"
         groups={[
@@ -114,10 +136,10 @@ export default async function Home() {
       )}
 
       <section aria-labelledby="can-title" className="frame bg-black py-[clamp(96px,18vh,200px)] text-white">
-        <ul className="mx-auto max-w-[1360px]">
-          <li className="grid gap-2 pb-6 md:grid-cols-12">
+        <Reveal as="ul" className="mx-auto max-w-[1360px]" stagger={0.09}>
+          <RevealItem as="li" className="grid gap-2 pb-6 md:grid-cols-12">
             <h2 id="can-title" className="text-[clamp(2.4rem,5.2vw,5.25rem)] text-mist md:col-span-8">Here you can</h2>
-          </li>
+          </RevealItem>
           {[
             ["Turn it in 3D", "Drag, pinch and zoom real 3D models and 360° photo sequences of watches, sunglasses and shoes.", "/search?has3d=1"],
             ["Build an outfit", "Pick a top, bottoms, shoes and accessories, see the total and add the whole look in one tap.", "/outfits"],
@@ -125,14 +147,14 @@ export default async function Home() {
             ["Pay with PIX", "PIX, credit and debit cards. Your order is confirmed only once payment is received.", "/help/payments"],
             ["Follow your order", "Every order has its own page with its status and tracking code.", "/account/orders"],
           ].map(([name, desc, href]) => (
-            <li key={name} className="grid items-baseline gap-x-8 gap-y-2 py-[0.35em] md:grid-cols-12">
+            <RevealItem as="li" key={name} className="grid items-baseline gap-x-8 gap-y-2 py-[0.35em] md:grid-cols-12">
               <Link href={href} className="block text-[clamp(2.4rem,5.2vw,5.25rem)] font-semibold leading-none transition-colors hover:text-emerald-bright md:col-span-8" style={{ fontStretch: "125%", letterSpacing: "-0.03em" }}>
                 {name}
               </Link>
               <p className="max-w-[40ch] pl-[var(--gutter)] text-[1.0625rem] text-white md:col-span-4 md:pl-0">{desc}</p>
-            </li>
+            </RevealItem>
           ))}
-        </ul>
+        </Reveal>
       </section>
 
       {hero && (
@@ -143,7 +165,7 @@ export default async function Home() {
             <p className="tabular mt-4 text-lead font-semibold">{formatBRL(effectivePrice(hero))}</p>
             <Link href={`/p/${hero.slug}`} className="btn btn-dark mt-6 w-full md:w-auto">Shop the sneaker</Link>
           </div>
-          <div className="relative order-2 h-[55svh] md:order-1 md:col-span-8 md:h-auto">
+          <div className="relative order-2 h-[55svh] overflow-hidden md:order-1 md:col-span-8 md:h-auto md:min-h-[90svh]">
             <Image src="/catalog/velocity-street-2.jpg" alt="The Velocity knit sneaker in street black, seen from the heel" fill sizes="(min-width: 768px) 66vw, 100vw" className="origin-bottom-left scale-[1.3] object-cover object-[30%_70%]" />
           </div>
         </section>

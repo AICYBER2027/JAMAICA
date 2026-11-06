@@ -17,6 +17,8 @@ type Props = {
   onInteract?: () => void;
   zoomSignal?: number;
   resetSignal?: number;
+  /** False pauses rendering (off screen or tab hidden). */
+  active?: boolean;
 };
 
 type Loaded = { scene: THREE.Group; parser: { json: unknown; getDependency: (type: string, index: number) => Promise<THREE.Material> } };
@@ -128,7 +130,7 @@ export default function ModelScene(props: Props) {
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance", toneMapping: THREE.ACESFilmicToneMapping }}
       camera={{ fov: props.hero ? 30 : 32, near: 0.01, far: 20, position: [0, 0.2, 1.6] }}
       style={{ touchAction: props.hero ? "pan-y" : "none" }}
-      frameloop="always"
+      frameloop={props.active === false ? "never" : "always"}
     >
       <ambientLight intensity={0.35} />
       <directionalLight position={[2, 4, 3]} intensity={1.6} castShadow />

@@ -35,7 +35,7 @@ export function Footer({ tall = false }: { tall?: boolean }) {
         </div>
       </div>
       <div className="frame absolute inset-x-0 bottom-0 pb-6">
-        <p aria-hidden="true" className="select-none text-center font-bold leading-[0.8] tracking-[-0.02em]" style={{ fontVariationSettings: '"wdth" 125', fontSize: "clamp(3.5rem, 17.2vw, 22rem)" }}>
+        <p aria-hidden="true" className="select-none text-center font-bold leading-[0.8] tracking-[-0.02em]" style={{ fontVariationSettings: '"wdth" 125', fontSize: "clamp(3rem, 15.4vw, 20rem)" }}>
           JAMAICA
         </p>
         <p className="mt-4 text-[0.8125rem] text-white/80">© {new Date().getFullYear()} JAMAICA. Prices in Brazilian reais.</p>

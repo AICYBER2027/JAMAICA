@@ -12,13 +12,13 @@ export function HeroObject({ slug, name, priceCents, modelUrl, poster, colours }
   const rise = (delay: number) => ({
     initial: { opacity: 0, y: 24 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] as const },
+    transition: { duration: 0.7, delay: delay * 0.5, ease: [0.16, 1, 0.3, 1] as const },
   });
 
   return (
     <section aria-labelledby="hero-title" className="relative isolate flex flex-col overflow-hidden bg-jade text-white md:block md:h-[calc(100svh-var(--header-h))] md:min-h-[600px]">
       {/* Headline split around the object; it lies above in the stacking order but lets drags through. */}
-      <h1 id="hero-title" className="pointer-events-none relative z-10 pt-6 text-center md:absolute md:inset-x-0 md:top-[6%] md:pt-0" style={{ fontSize: "clamp(2.6rem, 8.6vw, 9.5rem)", lineHeight: 0.9 }}>
+      <h1 id="hero-title" className="pointer-events-none relative z-10 [&>span]:pointer-events-auto [&>span]:mx-auto [&>span]:w-fit pt-6 text-center md:absolute md:inset-x-0 md:top-[6%] md:pt-0" style={{ fontSize: "clamp(2.6rem, 8.6vw, 9.5rem)", lineHeight: 0.9 }}>
         <motion.span className="block" {...rise(0.25)}>Turn it over.</motion.span>
         <motion.span className="mt-3 block md:mt-[2.3em]" {...rise(0.4)}>Then wear it.</motion.span>
       </h1>
@@ -50,7 +50,7 @@ export function HeroObject({ slug, name, priceCents, modelUrl, poster, colours }
               className="relative grid h-11 w-11 place-items-center"
             >
               <span className="block h-7 w-7 transition-transform duration-200" style={{ background: c.hex, transform: c.name === colour.name ? "scale(1)" : "scale(0.78)" }} />
-              {c.name === colour.name && <motion.span layoutId="hero-swatch" className="absolute inset-0 ring-2 ring-white" transition={{ type: "spring", stiffness: 500, damping: 35 }} />}
+              {c.name === colour.name && <motion.span layoutId="hero-swatch" className="absolute inset-0 border-2 border-white" transition={{ type: "spring", stiffness: 500, damping: 35 }} />}
             </button>
           ))}
         </div>
