@@ -13,7 +13,8 @@ import { dirname, join, normalize, resolve } from "node:path";
 export type Bucket = "public" | "private";
 
 const SUPABASE_URL = process.env.SUPABASE_URL?.replace(/\/$/, "");
-const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+// New Supabase projects issue "secret" keys (sb_secret_…); older ones a service_role JWT. Either works.
+const SUPABASE_KEY = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
 const BUCKETS: Record<Bucket, string> = {
   public: process.env.SUPABASE_PUBLIC_BUCKET || "media",
   private: process.env.SUPABASE_PRIVATE_BUCKET || "private",
@@ -51,11 +52,36 @@ export function publicUrl(path: string): string {
   return storageMode() === "supabase" ? `${SUPABASE_URL}/storage/v1/object/public/${BUCKETS.public}/${path}` : `/media/${path}`;
 }
 
+/** sb_secret_ keys go only in the apikey header; legacy JWT keys also as a Bearer token. */
+function authHeaders(): Record<string, string> {
+  const key = SUPABASE_KEY!;
+  return key.startsWith("eyJ") ? { apikey: key, Authorization: `Bearer ${key}` } : { apikey: key };
+}
+
+/** For the dashboard's system check: does each bucket exist, and is the public one public? */
+export async function bucketStatus(): Promise<{ name: string; role: Bucket; exists: boolean; public: boolean | null; error?: string }[]> {
+  if (storageMode() !== "supabase") return [];
+  return Promise.all(
+    (Object.keys(BUCKETS) as Bucket[]).map(async (role) => {
+      const name = BUCKETS[role];
+      try {
+        const res = await fetch(`${SUPABASE_URL}/storage/v1/bucket/${name}`, { headers: authHeaders(), cache: "no-store", signal: AbortSignal.timeout(8000) });
+        if (res.status === 404 || res.status === 400) return { name, role, exists: false, public: null };
+        if (!res.ok) return { name, role, exists: false, public: null, error: `HTTP ${res.status}` };
+        const j = (await res.json()) as { public?: boolean };
+        return { name, role, exists: true, public: !!j.public };
+      } catch (e) {
+        return { name, role, exists: false, public: null, error: (e as Error).message };
+      }
+    }),
+  );
+}
+
 async function supabase(method: string, url: string, init: { body?: BodyInit; headers?: Record<string, string> } = {}) {
   const res = await fetch(`${SUPABASE_URL}/storage/v1${url}`, {
     method,
     body: init.body,
-    headers: { Authorization: `Bearer ${SUPABASE_KEY}`, apikey: SUPABASE_KEY!, ...init.headers },
+    headers: { ...authHeaders(), ...init.headers },
     cache: "no-store",
   });
   if (!res.ok) throw new Error(`Supabase Storage ${method} ${url} failed: ${res.status} ${await res.text().catch(() => "")}`);

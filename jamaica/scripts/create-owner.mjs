@@ -1,6 +1,6 @@
 // Creates (or resets the password of) the store owner, who can then add employees from the dashboard.
 // Usage: npm run create-owner -- owner@example.com "Owner Name" "a long password"
-import "./env.mjs";
+import { dbOptions } from "./env.mjs";
 import postgres from "postgres";
 import { randomBytes, scryptSync } from "node:crypto";
 
@@ -17,7 +17,7 @@ const salt = randomBytes(16);
 const hash = scryptSync(password, salt, 64, { N: 16384, r: 8, p: 1, maxmem: 64 * 1024 * 1024 });
 const stored = ["scrypt", 16384, 8, 1, salt.toString("base64"), hash.toString("base64")].join("$");
 
-const sql = postgres(process.env.DATABASE_URL, { prepare: false, onnotice: () => {} });
+const sql = postgres(process.env.DATABASE_URL, dbOptions(process.env.DATABASE_URL));
 const [u] = await sql`
   insert into users (email, name, password_hash, role)
   values (${email.toLowerCase()}, ${name}, ${stored}, 'owner')
