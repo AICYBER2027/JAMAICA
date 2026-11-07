@@ -2,6 +2,7 @@ import Image from "next/image";
 import { requireStaff } from "@/lib/auth";
 import { sql } from "@/lib/db";
 import { getStoreSettings, integrations } from "@/lib/settings";
+import { systemChecks } from "@/lib/health";
 import { ActionForm } from "@/components/admin/ActionForm";
 import { TryonModelForm, TryonModelToggle } from "@/components/admin/TryonModels";
 import { saveSettings, saveShippingRates } from "@/app/actions/admin";
@@ -23,7 +24,8 @@ function Status({ on, label, detail, cost }: { on: boolean; label: string; detai
 
 export default async function Settings() {
   await requireStaff("settings");
-  const [s, i, rates, models] = await Promise.all([
+  const [checks, s, i, rates, models] = await Promise.all([
+    systemChecks(),
     getStoreSettings(),
     integrations(),
     sql<{ region: string; label: string; standard_cents: number; standard_days: number; express_cents: number; express_days: number; free_over_cents: number | null }[]>`select * from shipping_rates order by array_position(array['SE','S','CO','NE','N'], region)`,
@@ -33,6 +35,22 @@ export default async function Settings() {
   return (
     <div className="admin-page max-w-[1100px]">
       <h1 className="admin-title">Settings</h1>
+
+      <section id="system" aria-labelledby="sys-title" className="mt-8">
+        <h2 id="sys-title" className="text-[1.5rem]">System check</h2>
+        <p className="mt-1 max-w-[70ch] text-muted">Live test of the database, storage and settings, run each time you open this page.</p>
+        <ul className="mt-4 flex flex-col gap-1">
+          {checks.map((c) => (
+            <li key={c.name} className={`grid gap-1 px-4 py-3 sm:grid-cols-[240px_1fr] ${c.ok ? "bg-stone" : "bg-[#fff3d6]"}`}>
+              <p className="font-semibold"><span className={`status mr-2 ${c.ok ? "status-active" : "status-draft"}`}>{c.ok ? "OK" : "Fix"}</span>{c.name}</p>
+              <div>
+                <p>{c.detail}</p>
+                {c.fix && <p className="text-small text-muted">{c.fix}</p>}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <section id="payments" aria-labelledby="pay-title" className="mt-10 scroll-mt-6">
         <h2 id="pay-title" className="text-[1.5rem]">Store and PIX</h2>

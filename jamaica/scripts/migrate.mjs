@@ -1,9 +1,9 @@
 // Applies db/migrations/*.sql in order, once each.
-import "./env.mjs";
+import { dbOptions } from "./env.mjs";
 import postgres from "postgres";
 import { readdirSync, readFileSync } from "node:fs";
 
-const sql = postgres(process.env.DATABASE_URL, { prepare: false, onnotice: () => {} });
+const sql = postgres(process.env.DATABASE_URL, dbOptions(process.env.DATABASE_URL));
 await sql`create table if not exists schema_migrations (name text primary key, applied_at timestamptz not null default now())`;
 await sql`alter table schema_migrations enable row level security`;
 const done = new Set((await sql`select name from schema_migrations`).map((r) => r.name));

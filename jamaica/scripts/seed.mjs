@@ -1,10 +1,10 @@
 // Fills an empty database with the opening catalogue. Safe to re-run: existing slugs are skipped.
-import "./env.mjs";
+import { dbOptions } from "./env.mjs";
 import postgres from "postgres";
 import { readdirSync, existsSync } from "node:fs";
 import { categories, products, shippingRates, tryonModels } from "./seed-data.mjs";
 
-const sql = postgres(process.env.DATABASE_URL, { prepare: false, onnotice: () => {} });
+const sql = postgres(process.env.DATABASE_URL, dbOptions(process.env.DATABASE_URL));
 const img = (name) => `/catalog/${name}.jpg`;
 // Deterministic stock so every run looks the same: mostly in stock, a few sizes sold out.
 const stockFor = (sku) => {

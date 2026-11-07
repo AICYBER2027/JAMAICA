@@ -38,21 +38,33 @@ To take orders locally, open **Dashboard → Settings** and add a PIX key (or se
 
 ## Put it online (Vercel + Supabase)
 
-1. **Supabase** (free tier is enough to start): create a project.
-   - *Database*: copy the **Transaction pooler** connection string into `DATABASE_URL`.
-   - *Storage*: create a **public** bucket `media` and a **private** bucket `private`.
-   - *API*: copy the project URL to `SUPABASE_URL` and the `service_role` key to `SUPABASE_SERVICE_ROLE_KEY` (server only, never in the browser).
-2. From your computer, with `DATABASE_URL` pointing at Supabase: `npm run db:migrate`, `npm run db:seed`, `npm run create-owner -- …`.
-3. **Vercel**: Add New → Project → this repository, **Root Directory `jamaica`**. Add the environment variables from `.env.example` (`SITE_URL` = your domain, a long random `SESSION_SECRET` and `CRON_SECRET`).
-4. Deploy. Every merge to `main` goes live; every pull request gets a preview link. `vercel.json` runs `/api/cron/maintenance` hourly (expired unpaid orders go back to stock; try-on photos older than 24 h are deleted).
+1. **Supabase**: create a project.
+   - **SQL Editor** → paste all of `db/supabase-setup.sql` → **Run** (once). This creates every table and loads the sample catalogue.
+   - **Storage** → create a **public** bucket `media` and a **private** bucket `private`.
+   - Note the **Project URL** (Project Settings → API) and the **secret key** `sb_secret_…` (Project Settings → API Keys).
+   - **Connect** (top of the project) → **Transaction pooler** → copy the connection string and fill in your database password.
+2. **Vercel**: Add New → Project → this repository, **Root Directory `jamaica`**. Environment Variables:
 
-Every table has Row Level Security switched on with no public policies, so Supabase's public API keys can read nothing; only the server (via `DATABASE_URL`) reaches the data.
+   | Name | Value |
+   |---|---|
+   | `DATABASE_URL` | the Transaction pooler string (port 6543) |
+   | `SUPABASE_URL` | the Project URL |
+   | `SUPABASE_SECRET_KEY` | the `sb_secret_…` key (older projects: `SUPABASE_SERVICE_ROLE_KEY` with the service_role key) |
+   | `SESSION_SECRET` | 64 random characters (`openssl rand -hex 32`) |
+   | `CRON_SECRET` | another random value |
+   | `SITE_URL` | `https://<your-project>.vercel.app` (or your domain) |
+   | `OWNER_SETUP_CODE` | any secret phrase, 12+ characters, only until the owner exists |
+
+3. Deploy, open **`/admin/setup`**, enter the setup code and choose your owner email and password. Then **delete `OWNER_SETUP_CODE`** in Vercel.
+4. Check **Dashboard → Settings → System check**: database, tables, catalogue, owner and both buckets should all say OK. `/api/health` answers `{"ok":true}` for uptime monitors.
+
+The publishable key isn't needed: the store only reaches the database from the server, and Row Level Security blocks Supabase's public API from every table. Every merge to `main` goes live; every pull request gets a preview link. `vercel.json` runs `/api/cron/maintenance` hourly.
 
 ## External services: what they cost and what they need
 
 | Service | Used for | Needed? | Cost | Variables |
 |---|---|---|---|---|
-| Supabase | Postgres + file storage | Yes, in production | Free tier, then from US$25/month | `DATABASE_URL`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` |
+| Supabase | Postgres + file storage | Yes, in production | Free tier, then from US$25/month | `DATABASE_URL`, `SUPABASE_URL`, `SUPABASE_SECRET_KEY` |
 | Vercel | Hosting | Yes | Free hobby tier; Pro US$20/month for a business | — |
 | PIX (your bank) | PIX to your own key | One of the two payment options | Free (bank-dependent) | Set in Dashboard → Settings |
 | Mercado Pago | Credit/debit cards and PIX with automatic confirmation | Optional | Per-transaction fee set by Mercado Pago (varies by method and payout time) | `MERCADOPAGO_ACCESS_TOKEN`, `MERCADOPAGO_WEBHOOK_SECRET`; webhook URL `https://<domain>/api/webhooks/mercadopago`, topic "Payments" |

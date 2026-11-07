@@ -13,9 +13,9 @@ function change(now: number, before: number) {
   return pct === 0 ? "same as the week before" : `${pct > 0 ? "+" : ""}${pct}% on the week before`;
 }
 
-export default async function Overview({ searchParams }: { searchParams: Promise<{ denied?: string }> }) {
+export default async function Overview({ searchParams }: { searchParams: Promise<{ denied?: string; setup?: string }> }) {
   const user = await requireStaff();
-  const { denied } = await searchParams;
+  const { denied, setup: setupFlag } = await searchParams;
   const showSales = can(user, "reports");
   const [week, prev, days, counts, low, setup, toPrepare] = await Promise.all([
     showSales ? summary(7) : null,
@@ -40,6 +40,9 @@ export default async function Overview({ searchParams }: { searchParams: Promise
   return (
     <div className="admin-page">
       <h1 className="admin-title">Good to see you, {user.name.split(" ")[0]}</h1>
+      {setupFlag === "done" && (
+        <p className="mt-4 bg-[#dff3ea] px-4 py-3 text-[#0b5a3e]" role="status">Owner account created. Now delete OWNER_SETUP_CODE in Vercel, then check Settings → System check.</p>
+      )}
       {denied && denied in PERMISSIONS && (
         <p className="mt-4 bg-[#fff3d6] px-4 py-3" role="alert">Your account can’t open “{PERMISSIONS[denied as Permission]}”. Ask the owner to add it under Team.</p>
       )}
